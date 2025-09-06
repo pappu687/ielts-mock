@@ -32,7 +32,7 @@
                 <!-- Start::slide -->
                 <li class="slide has-sub">                
                     <a href="javascript:void(0);" class="side-menu__item">
-                        <i class="ri ri-home-line ri-2x"></i>
+                        <i class="ri ri-home-9-line ri-2x lh-1"></i>
                         <span class="side-menu__label">Admin</span>
                         <i class="ri-arrow-right side-menu__angle"></i>
                     </a>                    
@@ -42,110 +42,68 @@
                         </li>
                         <li class="slide {{ request()->is('admin') ? 'active' : '' }}">
                             <a href="{{ url('admin.dashboard.overview') }}" class="side-menu__item">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="side-menu-doublemenu__icon"
-                                    viewBox="0 0 256 256">
-                                    <rect width="256" height="256" fill="none" />
-                                    <path
-                                        d="M54.46,201.54c-9.2-9.2-3.1-28.53-7.78-39.85C41.82,150,24,140.5,24,128s17.82-22,22.68-33.69C51.36,83,45.26,63.66,54.46,54.46S83,51.36,94.31,46.68C106.05,41.82,115.5,24,128,24S150,41.82,161.69,46.68c11.32,4.68,30.65-1.42,39.85,7.78s3.1,28.53,7.78,39.85C214.18,106.05,232,115.5,232,128S214.18,150,209.32,161.69c-4.68,11.32,1.42,30.65-7.78,39.85s-28.53,3.1-39.85,7.78C150,214.18,140.5,232,128,232s-22-17.82-33.69-22.68C83,204.64,63.66,210.74,54.46,201.54Z"
-                                        opacity="0.2" />
-                                    <path
-                                        d="M54.46,201.54c-9.2-9.2-3.1-28.53-7.78-39.85C41.82,150,24,140.5,24,128s17.82-22,22.68-33.69C51.36,83,45.26,63.66,54.46,54.46S83,51.36,94.31,46.68C106.05,41.82,115.5,24,128,24S150,41.82,161.69,46.68c11.32,4.68,30.65-1.42,39.85,7.78s3.1,28.53,7.78,39.85C214.18,106.05,232,115.5,232,128S214.18,150,209.32,161.69c-4.68,11.32,1.42,30.65-7.78,39.85s-28.53,3.1-39.85,7.78C150,214.18,140.5,232,128,232s-22-17.82-33.69-22.68C83,204.64,63.66,210.74,54.46,201.54Z"
-                                        fill="none" stroke="currentColor" stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="16" />
-                                    <circle cx="96" cy="96" r="16" fill="none" stroke="currentColor"
-                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
-                                    <circle cx="160" cy="160" r="16" fill="none"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="16" />
-                                    <line x1="88" y1="168" x2="168" y2="88"
-                                        fill="none" stroke="currentColor" stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="16" />
-                                </svg>
-                                Sales</a>
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Home</a>
                         </li>
                     </ul>
                 </li>
-                <!-- End::slide -->
-
-                <!-- Start::slide__category -->
-                <li class="slide__category"><span class="category-name">Web Apps</span></li>
-                <!-- End::slide__category -->
-
-                <!-- Start::slide -->
-                <li class="slide has-sub">
+                <li class="slide has-sub">                
                     <a href="javascript:void(0);" class="side-menu__item">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon" viewBox="0 0 256 256">
-                            <rect width="256" height="256" fill="none" />
-                            <polygon points="32 80 128 136 224 80 128 24 32 80" opacity="0.2" />
-                            <polyline points="32 176 128 232 224 176" fill="none" stroke="currentColor"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
-                            <polyline points="32 128 128 184 224 128" fill="none" stroke="currentColor"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
-                            <polygon points="32 80 128 136 224 80 128 24 32 80" fill="none" stroke="currentColor"
-                                stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
-                        </svg>
-                        <span class="side-menu__label">Nested Menu</span>
-                        <i class="ri-arrow-right-s-line side-menu__angle"></i>
-                    </a>
-                    <ul class="slide-menu child1">
+                        <i class="ri ri-group-line ri-2x lh-1"></i>
+                        <span class="side-menu__label">Users</span>
+                        <i class="ri-arrow-right side-menu__angle"></i>
+                    </a>                    
+                    <ul class="slide-menu child1 {{ request()->is('users') ? 'double-menu-active' : '' }}">
                         <li class="slide side-menu__label1">
-                            <a href="javascript:void(0)">Nested Menu</a>
+                            <a href="javascript:void(0)">Manage Users</a>
                         </li>
-                        <li class="slide">
-                            <a href="javascript:void(0);" class="side-menu__item">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="side-menu-doublemenu__icon"
-                                    viewBox="0 0 256 256">
-                                    <rect width="256" height="256" fill="none" />
-                                    <rect x="32" y="80" width="160" height="128" rx="8"
-                                        opacity="0.2" />
-                                    <rect x="32" y="80" width="160" height="128" rx="8" fill="none"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="16" />
-                                    <path d="M64,48H216a8,8,0,0,1,8,8V176" fill="none" stroke="currentColor"
-                                        stroke-linecap="round" stroke-linejoin="round" stroke-width="16" />
-                                </svg>
-                                Nested-1
-                            </a>
-                        </li>
-                        <li class="slide has-sub">
-                            <a href="javascript:void(0);" class="side-menu__item">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="side-menu-doublemenu__icon"
-                                    viewBox="0 0 256 256">
-                                    <rect width="256" height="256" fill="none" />
-                                    <rect x="40" y="96" width="176" height="112" rx="8"
-                                        opacity="0.2" />
-                                    <rect x="40" y="96" width="176" height="112" rx="8" fill="none"
-                                        stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                        stroke-width="16" />
-                                    <line x1="56" y1="64" x2="200" y2="64"
-                                        fill="none" stroke="currentColor" stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="16" />
-                                    <line x1="72" y1="32" x2="184" y2="32"
-                                        fill="none" stroke="currentColor" stroke-linecap="round"
-                                        stroke-linejoin="round" stroke-width="16" />
-                                </svg>
-                                Nested-2
-                                <i class="ri-arrow-right-s-line side-menu__angle"></i></a>
-                            <ul class="slide-menu child2">
-                                <li class="slide">
-                                    <a href="javascript:void(0);" class="side-menu__item">Nested-2.1</a>
-                                </li>
-                                <li class="slide has-sub">
-                                    <a href="javascript:void(0);" class="side-menu__item">Nested-2.2
-                                        <i class="ri-arrow-right-s-line side-menu__angle"></i></a>
-                                    <ul class="slide-menu child3">
-                                        <li class="slide">
-                                            <a href="javascript:void(0);" class="side-menu__item">Nested-2.2.1</a>
-                                        </li>
-                                        <li class="slide">
-                                            <a href="javascript:void(0);" class="side-menu__item">Nested-2.2.2</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
+                        <li class="slide {{ request()->is('users') ? 'active' : '' }}">
+                            <a href="{{ url('admin.dashboard.overview') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Home</a>
                         </li>
                     </ul>
                 </li>
+                <li class="slide has-sub">                
+                    <a href="javascript:void(0);" class="side-menu__item">
+                        <i class="ri ri-contract-line ri-2x lh-1"></i>
+                        <span class="side-menu__label">Exams</span>
+                        <i class="ri-arrow-right side-menu__angle"></i>
+                    </a>                    
+                    <ul class="slide-menu child1 {{ request()->is('exams') ? 'double-menu-active' : '' }}">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0)">Exams</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin') ? 'active' : '' }}">
+                            <a href="{{ url('admin.dashboard.overview') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Types</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin') ? 'active' : '' }}">
+                            <a href="{{ url('admin.dashboard.overview') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Sessions</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin') ? 'active' : '' }}">
+                            <a href="{{ url('admin.dashboard.overview') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Sections</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="slide has-sub">                
+                    <a href="javascript:void(0);" class="side-menu__item">
+                        <i class="ri ri-money-dollar-circle-line ri-2x lh-1"></i>
+                        <span class="side-menu__label">Payments</span>
+                        <i class="ri-arrow-right side-menu__angle"></i>
+                    </a>                    
+                    <ul class="slide-menu child1 {{ request()->is('payments') ? 'double-menu-active' : '' }}">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0)">Payments</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin') ? 'active' : '' }}">
+                            <a href="{{ url('admin.dashboard.overview') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Home</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- End::slide -->                
+
                 <!-- End::slide -->            
 
             </ul>
