@@ -498,8 +498,7 @@
   window.addEventListener('scroll', () => {
     var widnowScroll = document.body.scrollTop || document.documentElement.scrollTop,
       height = document.documentElement.scrollHeight - document.documentElement.clientHeight,
-      scrollAmount = (widnowScroll / height) * 100;
-    document.querySelector(".progress-top-bar").style.width = scrollAmount + "%";
+      scrollAmount = (widnowScroll / height) * 100;    
   })
   /* Progressbar Top */
 

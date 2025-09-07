@@ -45,20 +45,24 @@
                                 <i class="ri ri-arrow-right-line ri-xl me-1"></i> Home</a>
                         </li>
                     </ul>
-                </li>
+                </li>                
                 <li class="slide has-sub">                
                     <a href="javascript:void(0);" class="side-menu__item">
                         <i class="ri ri-group-line ri-2x lh-1"></i>
                         <span class="side-menu__label">Users</span>
                         <i class="ri-arrow-right side-menu__angle"></i>
                     </a>                    
-                    <ul class="slide-menu child1 {{ request()->is('users') ? 'double-menu-active' : '' }}">
+                    <ul class="slide-menu child1 {{ request()->is('admin/users') ? 'double-menu-active' : '' }}">
                         <li class="slide side-menu__label1">
                             <a href="javascript:void(0)">Manage Users</a>
                         </li>
-                        <li class="slide {{ request()->is('users') ? 'active' : '' }}">
-                            <a href="{{ url('admin.dashboard.overview') }}" class="side-menu__item">
-                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Home</a>
+                        <li class="slide {{ request()->is('admin/users') ? 'active' : '' }}">
+                            <a href="{{ route('admin.users.index') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> List Users</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/users/add') ? 'active' : '' }}">
+                            <a href="{{ route('admin.users.create') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Add User</a>
                         </li>
                     </ul>
                 </li>

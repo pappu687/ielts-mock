@@ -53,9 +53,9 @@
 
         <!-- Start::app-content -->
         <div class="main-content app-content">
-            <div class="container-fluid page-container main-body-container">
+            <div class="container-fluid page-container main-body-containers">
 
-                @yield('content')                
+                {{$slot}}    
 
             </div>
         </div>
