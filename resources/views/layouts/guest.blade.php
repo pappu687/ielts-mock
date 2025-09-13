@@ -15,7 +15,7 @@
         content="">
 
     <!-- Title-->
-    <title> Vyzor Starterkit - Laravel Bootstrap 5 Premium Admin & Dashboard Template </title>
+    <title>@yield('title', config('app.name'))</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('build/assets/images/brand-logos/favicon.ico') }}" type="image/x-icon">

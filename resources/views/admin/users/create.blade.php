@@ -1,5 +1,5 @@
 <x-backend-layout>
-    <div class="container p-3">
+    <div class="container">
         <div class="page-header-breadcrumb mb-3">
             <div class="d-flex align-center justify-content-between flex-wrap">
                 <h1 class="page-title fw-bold fs-18 mb-0">Add New User</h1>
@@ -19,7 +19,7 @@
             <div class="col-md-6 mb-3">
                 <label class="form-label">First Name <span class="text-danger">*</span></label>
                 <input type="text" name="first_name" class="form-control @error('first_name') is-invalid @enderror" 
-                       placeholder="First name" aria-label="First name" value="{{ old('first_name') }}" required>
+                       placeholder="First name" aria-label="First name" value="{{ old('first_name') }}">
                 @error('first_name')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -27,7 +27,7 @@
             <div class="col-md-6 mb-3">
                 <label class="form-label">Last Name <span class="text-danger">*</span></label>
                 <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" 
-                       placeholder="Last name" aria-label="Last name" value="{{ old('last_name') }}" required>
+                       placeholder="Last name" aria-label="Last name" value="{{ old('last_name') }}">
                 @error('last_name')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -37,7 +37,7 @@
                     <div class="col-xl-12 mb-3">
                         <label class="form-label">Email <span class="text-danger">*</span></label>
                         <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" 
-                               placeholder="Email" aria-label="email" value="{{ old('email') }}" required>
+                               placeholder="Email" aria-label="email" value="{{ old('email') }}">
                         @error('email')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

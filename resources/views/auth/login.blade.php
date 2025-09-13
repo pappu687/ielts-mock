@@ -20,7 +20,7 @@
                                     <div class="col-xl-12">
                                         <label for="signin-email" class="form-label text-default">Email</label>
                                         <input type="text" class="form-control" id="signin-email" name="email"
-                                            placeholder="Enter Email" value="">
+                                            placeholder="Enter Email" value="superadmin@ielts.test">
                                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                     </div>
                                     <div class="col-xl-12 mb-2">
@@ -28,7 +28,7 @@
                                             class="form-label text-default d-block">Password</label>
                                         <div class="position-relative">
                                             <input type="password" class="form-control" id="signin-password"
-                                                name="password" placeholder="Enter Password" value="">
+                                                name="password" placeholder="Enter Password" value="password123">
                                             <a href="javascript:void(0);" class="show-password-button text-muted"
                                                 onclick="createpassword('signin-password',this)">
                                                 <i class="ri-eye-off-line align-middle"></i>

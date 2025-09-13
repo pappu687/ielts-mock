@@ -15,7 +15,7 @@
         content="laravel, laravel admin panel, laravel dashboard, bootstrap dashboard, bootstrap admin panel, vite laravel, admin dashboard, admin panel in laravel, admin dashboard ui, laravel admin, admin panel template, laravel framework, dashboard, admin dashboard template, laravel template.">
 
     <!-- Title-->
-    <title> Vyzor Starterkit - Laravel Bootstrap 5 Premium Admin & Dashboard Template </title>
+    <title>@yield('title', config('app.name'))</title>
 
     <!-- Favicon -->
     <link rel="icon" href="{{ asset('build/assets/images/brand-logos/favicon.ico') }}" type="image/x-icon">
@@ -57,33 +57,9 @@
         <!-- End::main-sidebar -->
 
         <!-- Start::app-content -->
-        <div class="main-content app-content p-0">
-            @if (session('success'))
-                <div class="alert alert-success alert-dismissible fade show" role="alert">
-                    {{ session('success') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-
-            @if (session('error'))
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    {{ session('error') }}
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-
-            @if ($errors->any())
-                <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
-            @endif
-
-            <div class="container-fluid page-container main-body-containers">
+        <div class="main-content app-content p-0">        
+            <div class="container-fluid page-container pt-2">
+                @include('layouts.components.flash-messages')
 
                 {{ $slot }}
 
