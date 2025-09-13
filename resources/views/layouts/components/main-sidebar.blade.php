@@ -29,83 +29,296 @@
                 <li class="slide__category"><span class="category-name">Main</span></li>
                 <!-- End::slide__category -->
 
-                <!-- Start::slide -->
+                <!-- Dashboard -->
                 <li class="slide has-sub">                
-                    <a href="javascript:void(0);" class="side-menu__item">
-                        <i class="ri ri-home-9-line ri-2x lh-1"></i>
-                        <span class="side-menu__label">Admin</span>
+                    <a href="javascript:void(0);" class="side-menu__item {{ request()->is('admin') ? 'active open text-indigo' : '' }}">
+                        <i class="ri ri-dashboard-3-line ri-2x lh-1"></i>
+                        <span class="side-menu__label">Dashboard</span>
                         <i class="ri-arrow-right side-menu__angle"></i>
                     </a>                    
                     <ul class="slide-menu child1 {{ request()->is('admin') ? 'double-menu-active' : '' }}">
                         <li class="slide side-menu__label1">
-                            <a href="javascript:void(0)">Admin Dashboard</a>
+                            <a href="javascript:void(0)">Dashboard Overview</a>
                         </li>
                         <li class="slide {{ request()->is('admin') ? 'active' : '' }}">
-                            <a href="{{ url('admin.dashboard.overview') }}" class="side-menu__item">
-                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Home</a>
+                            <a href="{{ route('admin.dashboard.overview') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Overview</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/dashboard-recent-activity') ? 'active' : '' }}">
+                            <a href="{{ route('admin.dashboard.recent-activity') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Recent Activity</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/dashboard-system-status') ? 'active' : '' }}">
+                            <a href="{{ route('admin.dashboard.system-status') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> System Status</a>
                         </li>
                     </ul>
-                </li>                
-                <li class="slide has-sub">                
-                    <a href="javascript:void(0);" class="side-menu__item">
+                </li>
+
+                <!-- User Management -->
+                <li class="slide has-sub">         
+                    <a href="javascript:void(0);" class="side-menu__item {{ request()->is('admin/users*') || request()->is('admin/subscriptions*') || request()->is('admin/progress*') || request()->is('admin/roles-permissions*') ? 'active open text-indigo' : '' }}">
                         <i class="ri ri-group-line ri-2x lh-1"></i>
-                        <span class="side-menu__label">Users</span>
+                        <span class="side-menu__label">User Management</span>
                         <i class="ri-arrow-right side-menu__angle"></i>
                     </a>                    
-                    <ul class="slide-menu child1 {{ request()->is('admin/users') ? 'double-menu-active' : '' }}">
+                    <ul class="slide-menu child1 {{ request()->is('admin/users*') || request()->is('admin/subscriptions*') || request()->is('admin/progress*') || request()->is('admin/roles-permissions*') ? 'double-menu-active' : '' }}">
                         <li class="slide side-menu__label1">
-                            <a href="javascript:void(0)">Manage Users</a>
+                            <a href="javascript:void(0)">User Management</a>
                         </li>
                         <li class="slide {{ request()->is('admin/users') ? 'active' : '' }}">
                             <a href="{{ route('admin.users.index') }}" class="side-menu__item">
-                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> List Users</a>
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Users</a>
                         </li>
-                        <li class="slide {{ request()->is('admin/users/add') ? 'active' : '' }}">
+                        <li class="slide {{ request()->is('admin/users/create') ? 'active' : '' }}">
                             <a href="{{ route('admin.users.create') }}" class="side-menu__item">
                                 <i class="ri ri-arrow-right-line ri-xl me-1"></i> Add User</a>
                         </li>
+                        <li class="slide {{ request()->is('admin/subscriptions*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.subscriptions.index') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Subscriptions</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/progress*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.progress.index', 1) }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> User Progress</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/roles-permissions*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.roles.index') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Roles & Permissions</a>
+                        </li>
                     </ul>
                 </li>
+
+                <!-- Exam Management -->
                 <li class="slide has-sub">                
-                    <a href="javascript:void(0);" class="side-menu__item">
+                    <a href="javascript:void(0);" class="side-menu__item {{ request()->is('admin/exam-types*') || request()->is('admin/exam-sessions*') || request()->is('admin/exam-sections*') ? 'active open text-indigo' : '' }}">
                         <i class="ri ri-contract-line ri-2x lh-1"></i>
-                        <span class="side-menu__label">Exams</span>
+                        <span class="side-menu__label">Exam Management</span>
                         <i class="ri-arrow-right side-menu__angle"></i>
                     </a>                    
-                    <ul class="slide-menu child1 {{ request()->is('exams') ? 'double-menu-active' : '' }}">
+                    <ul class="slide-menu child1 {{ request()->is('admin/exam-types*') || request()->is('admin/exam-sessions*') || request()->is('admin/exam-sections*') ? 'double-menu-active' : '' }}">
                         <li class="slide side-menu__label1">
-                            <a href="javascript:void(0)">Exams</a>
+                            <a href="javascript:void(0)">Exam Management</a>
                         </li>
-                        <li class="slide {{ request()->is('admin') ? 'active' : '' }}">
-                            <a href="{{ url('admin.dashboard.overview') }}" class="side-menu__item">
-                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Types</a>
+                        <li class="slide {{ request()->is('admin/exam-types*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.exam-types.index') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Exam Types</a>
                         </li>
-                        <li class="slide {{ request()->is('admin') ? 'active' : '' }}">
-                            <a href="{{ url('admin.dashboard.overview') }}" class="side-menu__item">
-                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Sessions</a>
+                        <li class="slide {{ request()->is('admin/exam-sessions*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.exam-sessions.active') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Exam Sessions</a>
                         </li>
-                        <li class="slide {{ request()->is('admin') ? 'active' : '' }}">
-                            <a href="{{ url('admin.dashboard.overview') }}" class="side-menu__item">
-                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Sections</a>
+                        <li class="slide {{ request()->is('admin/exam-sections*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.exam-sections.show', 1) }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Exam Sections</a>
                         </li>
                     </ul>
                 </li>
+
+                <!-- Content Management -->
                 <li class="slide has-sub">                
-                    <a href="javascript:void(0);" class="side-menu__item">
+                    <a href="javascript:void(0);" class="side-menu__item {{ request()->is('admin/question-banks*') || request()->is('admin/questions*') || request()->is('admin/reading-passages*') || request()->is('admin/listening-audios*') || request()->is('admin/writing-prompts*') || request()->is('admin/speaking-questions*') || request()->is('admin/content-approval*') ? 'active open text-indigo' : '' }}">
+                        <i class="ri ri-file-text-line ri-2x lh-1"></i>
+                        <span class="side-menu__label">Content Management</span>
+                        <i class="ri-arrow-right side-menu__angle"></i>
+                    </a>                    
+                    <ul class="slide-menu child1 {{ request()->is('admin/question-banks*') || request()->is('admin/questions*') || request()->is('admin/reading-passages*') || request()->is('admin/listening-audios*') || request()->is('admin/writing-prompts*') || request()->is('admin/speaking-questions*') || request()->is('admin/content-approval*') ? 'double-menu-active' : '' }}">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0)">Content Management</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/question-banks*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.question-banks.index') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Question Banks</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/questions*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.questions.index') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Questions</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/reading-passages*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.reading-passages.index') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Reading Passages</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/listening-audios*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.listening-audios.index') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Listening Audios</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/writing-prompts*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.writing-prompts.index') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Writing Prompts</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/speaking-questions*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.speaking-questions.index') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Speaking Questions</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/content-approval*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.content-approval.pending') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Content Approval</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Assessments -->
+                <li class="slide has-sub">                
+                    <a href="javascript:void(0);" class="side-menu__item {{ request()->is('admin/reading-assessments*') || request()->is('admin/listening-assessments*') || request()->is('admin/writing-assessments*') || request()->is('admin/speaking-assessments*') || request()->is('admin/score-history*') ? 'active open text-indigo' : '' }}">
+                        <i class="ri ri-clipboard-line ri-2x lh-1"></i>
+                        <span class="side-menu__label">Assessments</span>
+                        <i class="ri-arrow-right side-menu__angle"></i>
+                    </a>                    
+                    <ul class="slide-menu child1 {{ request()->is('admin/reading-assessments*') || request()->is('admin/listening-assessments*') || request()->is('admin/writing-assessments*') || request()->is('admin/speaking-assessments*') || request()->is('admin/score-history*') ? 'double-menu-active' : '' }}">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0)">Assessments</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/reading-assessments*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.reading-assessments.scores') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Reading Assessments</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/listening-assessments*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.listening-assessments.scores') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Listening Assessments</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/writing-assessments*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.writing-assessments.index') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Writing Assessments</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/speaking-assessments*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.speaking-assessments.index') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Speaking Assessments</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/score-history*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.score-history.index', 1) }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Score History</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Analytics & Reporting -->
+                <li class="slide has-sub">                
+                    <a href="javascript:void(0);" class="side-menu__item {{ request()->is('admin/analytics*') ? 'active open text-indigo' : '' }}">
+                        <i class="ri ri-bar-chart-line ri-2x lh-1"></i>
+                        <span class="side-menu__label">Analytics</span>
+                        <i class="ri-arrow-right side-menu__angle"></i>
+                    </a>                    
+                    <ul class="slide-menu child1 {{ request()->is('admin/analytics*') ? 'double-menu-active' : '' }}">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0)">Analytics & Reporting</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/analytics/users') ? 'active' : '' }}">
+                            <a href="{{ route('admin.analytics.users') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> User Analytics</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/analytics/exams') ? 'active' : '' }}">
+                            <a href="{{ route('admin.analytics.exams') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Exam Analytics</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/analytics/system') ? 'active' : '' }}">
+                            <a href="{{ route('admin.analytics.system') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> System Analytics</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/analytics/learning') ? 'active' : '' }}">
+                            <a href="{{ route('admin.analytics.learning') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Learning Analytics</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Notifications -->
+                <li class="slide has-sub">                
+                    <a href="javascript:void(0);" class="side-menu__item {{ request()->is('admin/notifications*') ? 'active open text-indigo' : '' }}">
+                        <i class="ri ri-notification-3-line ri-2x lh-1"></i>
+                        <span class="side-menu__label">Notifications</span>
+                        <i class="ri-arrow-right side-menu__angle"></i>
+                    </a>                    
+                    <ul class="slide-menu child1 {{ request()->is('admin/notifications*') ? 'double-menu-active' : '' }}">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0)">Notification Management</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/notifications/email*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.notifications.email.templates') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Email Templates</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/notifications/in-app*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.notifications.in-app.history') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> In-App Notifications</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/notifications/sms*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.notifications.sms.templates') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> SMS Templates</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/notifications/push*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.notifications.push.logs') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Push Notifications</a>
+                        </li>
+                    </ul>
+                </li>
+
+                <!-- Payments -->
+                <li class="slide has-sub">                
+                    <a href="javascript:void(0);" class="side-menu__item {{ request()->is('admin/payments*') ? 'active open text-indigo' : '' }}">
                         <i class="ri ri-money-dollar-circle-line ri-2x lh-1"></i>
                         <span class="side-menu__label">Payments</span>
                         <i class="ri-arrow-right side-menu__angle"></i>
                     </a>                    
-                    <ul class="slide-menu child1 {{ request()->is('payments') ? 'double-menu-active' : '' }}">
+                    <ul class="slide-menu child1 {{ request()->is('admin/payments*') ? 'double-menu-active' : '' }}">
                         <li class="slide side-menu__label1">
-                            <a href="javascript:void(0)">Payments</a>
+                            <a href="javascript:void(0)">Payment Management</a>
                         </li>
-                        <li class="slide {{ request()->is('admin') ? 'active' : '' }}">
-                            <a href="{{ url('admin.dashboard.overview') }}" class="side-menu__item">
-                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Home</a>
+                        <li class="slide {{ request()->is('admin/payments/plans') ? 'active' : '' }}">
+                            <a href="{{ route('admin.payments.plans') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Plans</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/payments/history') ? 'active' : '' }}">
+                            <a href="{{ route('admin.payments.history') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Payment History</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/payments/refunds') ? 'active' : '' }}">
+                            <a href="{{ route('admin.payments.refunds') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Refunds</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/payments/coupons*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.payments.coupons.usage') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Coupons</a>
                         </li>
                     </ul>
                 </li>
+
+                <!-- System Settings -->
+                <li class="slide has-sub">                
+                    <a href="javascript:void(0);" class="side-menu__item {{ request()->is('admin/settings*') || request()->is('admin/future-enhancements*') ? 'active open text-indigo' : '' }}">
+                        <i class="ri ri-settings-3-line ri-2x lh-1"></i>
+                        <span class="side-menu__label">System</span>
+                        <i class="ri-arrow-right side-menu__angle"></i>
+                    </a>                    
+                    <ul class="slide-menu child1 {{ request()->is('admin/settings*') || request()->is('admin/future-enhancements*') ? 'double-menu-active' : '' }}">
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0)">System Management</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/settings/general') ? 'active' : '' }}">
+                            <a href="{{ route('admin.settings.general') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> General Settings</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/settings/security') ? 'active' : '' }}">
+                            <a href="{{ route('admin.settings.security') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Security Settings</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/settings/integrations') ? 'active' : '' }}">
+                            <a href="{{ route('admin.settings.integrations') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Integrations</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/settings/exam-integrity') ? 'active' : '' }}">
+                            <a href="{{ route('admin.settings.exam-integrity') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Exam Integrity</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/settings/maintenance') ? 'active' : '' }}">
+                            <a href="{{ route('admin.settings.maintenance') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Maintenance</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/future-enhancements*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.future.ai-study-plans') }}" class="side-menu__item">
+                                <i class="ri ri-arrow-right-line ri-xl me-1"></i> Future Enhancements</a>
+                        </li>
+                    </ul>
+                </li>
+
                 <!-- End::slide -->                
 
                 <!-- End::slide -->            

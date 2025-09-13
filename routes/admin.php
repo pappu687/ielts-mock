@@ -45,6 +45,7 @@ Route::prefix('admin')->middleware([ 'auth', 'role:admin|super-admin' ])->group(
     // User Management Routes
     Route::prefix('users')->group(function () {
         Route::get('/', [ UserController::class, 'index' ])->name('admin.users.index');
+        Route::get('/list', [ UserController::class, 'listUsers' ])->name('admin.users.list');
         Route::post('/', [ UserController::class, 'store' ])->name('admin.users.store');
         Route::get('/create', [ UserController::class, 'create' ])->name('admin.users.create');
         Route::get('/{user}', [ UserController::class, 'show' ])->name('admin.users.show');
@@ -82,6 +83,7 @@ Route::prefix('admin')->middleware([ 'auth', 'role:admin|super-admin' ])->group(
     // Exam Management Routes
     Route::prefix('exam-types')->group(function () {
         Route::get('/', [ ExamTypeController::class, 'index' ])->name('admin.exam-types.index');
+        Route::get('/list', [ ExamTypeController::class, 'listExamTypes' ])->name('admin.exam-types.list');
         Route::post('/', [ ExamTypeController::class, 'store' ])->name('admin.exam-types.store');
         Route::put('/{examType}', [ ExamTypeController::class, 'update' ])->name('admin.exam-types.update');
         Route::post('/{examType}/pricing', [ ExamTypeController::class, 'setPricing' ])->name('admin.exam-types.pricing');
@@ -103,6 +105,7 @@ Route::prefix('admin')->middleware([ 'auth', 'role:admin|super-admin' ])->group(
     // Content Management Routes
     Route::prefix('question-banks')->group(function () {
         Route::get('/', [ QuestionBankController::class, 'index' ])->name('admin.question-banks.index');
+        Route::get('/list', [ QuestionBankController::class, 'listQuestionBanks' ])->name('admin.question-banks.list');
         Route::post('/', [ QuestionBankController::class, 'store' ])->name('admin.question-banks.store');
         Route::put('/{questionBank}', [ QuestionBankController::class, 'update' ])->name('admin.question-banks.update');
         Route::post('/{questionBank}/toggle', [ QuestionBankController::class, 'toggleActive' ])->name('admin.question-banks.toggle');
@@ -112,6 +115,7 @@ Route::prefix('admin')->middleware([ 'auth', 'role:admin|super-admin' ])->group(
 
     Route::prefix('questions')->group(function () {
         Route::get('/', [ QuestionController::class, 'index' ])->name('admin.questions.index');
+        Route::get('/list', [ QuestionController::class, 'listQuestions' ])->name('admin.questions.list');
         Route::post('/', [ QuestionController::class, 'store' ])->name('admin.questions.store');
         Route::put('/{question}', [ QuestionController::class, 'update' ])->name('admin.questions.update');
         Route::post('/{question}/approve', [ QuestionController::class, 'approve' ])->name('admin.questions.approve');
@@ -120,6 +124,7 @@ Route::prefix('admin')->middleware([ 'auth', 'role:admin|super-admin' ])->group(
 
     Route::prefix('reading-passages')->group(function () {
         Route::get('/', [ ReadingPassageController::class, 'index' ])->name('admin.reading-passages.index');
+        Route::get('/list', [ ReadingPassageController::class, 'listReadingPassages' ])->name('admin.reading-passages.list');
         Route::post('/', [ ReadingPassageController::class, 'store' ])->name('admin.reading-passages.store');
         Route::put('/{readingPassage}', [ ReadingPassageController::class, 'update' ])->name('admin.reading-passages.update');
         Route::post('/{readingPassage}/categorize', [ ReadingPassageController::class, 'categorize' ])->name('admin.reading-passages.categorize');
@@ -127,6 +132,7 @@ Route::prefix('admin')->middleware([ 'auth', 'role:admin|super-admin' ])->group(
 
     Route::prefix('listening-audios')->group(function () {
         Route::get('/', [ ListeningAudioController::class, 'index' ])->name('admin.listening-audios.index');
+        Route::get('/list', [ ListeningAudioController::class, 'listListeningAudios' ])->name('admin.listening-audios.list');
         Route::post('/', [ ListeningAudioController::class, 'store' ])->name('admin.listening-audios.store');
         Route::put('/{listeningAudio}', [ ListeningAudioController::class, 'update' ])->name('admin.listening-audios.update');
         Route::post('/{listeningAudio}/transcript', [ ListeningAudioController::class, 'updateTranscript' ])->name('admin.listening-audios.transcript');
@@ -134,6 +140,7 @@ Route::prefix('admin')->middleware([ 'auth', 'role:admin|super-admin' ])->group(
 
     Route::prefix('writing-prompts')->group(function () {
         Route::get('/', [ WritingPromptController::class, 'index' ])->name('admin.writing-prompts.index');
+        Route::get('/list', [ WritingPromptController::class, 'listWritingPrompts' ])->name('admin.writing-prompts.list');
         Route::post('/', [ WritingPromptController::class, 'store' ])->name('admin.writing-prompts.store');
         Route::put('/{writingPrompt}', [ WritingPromptController::class, 'update' ])->name('admin.writing-prompts.update');
         Route::post('/{writingPrompt}/criteria', [ WritingPromptController::class, 'setCriteria' ])->name('admin.writing-prompts.criteria');
@@ -141,6 +148,7 @@ Route::prefix('admin')->middleware([ 'auth', 'role:admin|super-admin' ])->group(
 
     Route::prefix('speaking-questions')->group(function () {
         Route::get('/', [ SpeakingQuestionController::class, 'index' ])->name('admin.speaking-questions.index');
+        Route::get('/list', [ SpeakingQuestionController::class, 'listSpeakingQuestions' ])->name('admin.speaking-questions.list');
         Route::post('/', [ SpeakingQuestionController::class, 'store' ])->name('admin.speaking-questions.store');
         Route::put('/{speakingQuestion}', [ SpeakingQuestionController::class, 'update' ])->name('admin.speaking-questions.update');
         Route::post('/{speakingQuestion}/follow-ups', [ SpeakingQuestionController::class, 'updateFollowUps' ])->name('admin.speaking-questions.follow-ups');
