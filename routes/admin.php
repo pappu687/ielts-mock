@@ -204,7 +204,7 @@ Route::prefix('admin')->middleware([ 'auth', 'role:admin|super-admin' ])->group(
         Route::post('/email/settings', [ NotificationController::class, 'emailSettings' ])->name('admin.notifications.email.settings');
         Route::post('/in-app', [ NotificationController::class, 'createInApp' ])->name('admin.notifications.in-app.create');
         Route::get('/in-app/history', [ NotificationController::class, 'inAppHistory' ])->name('admin.notifications.in-app.history');
-        Route::post('/sms/templates', [ NotificationController::class, 'smsTemplates' ])->name('admin.notifications.sms.templates');
+        Route::get('/sms/templates', [ NotificationController::class, 'smsTemplates' ])->name('admin.notifications.sms.templates');
         Route::post('/sms/settings', [ NotificationController::class, 'smsSettings' ])->name('admin.notifications.sms.settings');
         Route::post('/push', [ NotificationController::class, 'pushNotifications' ])->name('admin.notifications.push.create');
         Route::get('/push/logs', [ NotificationController::class, 'pushLogs' ])->name('admin.notifications.push.logs');
@@ -216,7 +216,7 @@ Route::prefix('admin')->middleware([ 'auth', 'role:admin|super-admin' ])->group(
         Route::post('/plans', [ PaymentController::class, 'storePlan' ])->name('admin.payments.plans.store');
         Route::put('/plans/{plan}', [ PaymentController::class, 'updatePlan' ])->name('admin.payments.plans.update');
         Route::get('/history', [ PaymentController::class, 'history' ])->name('admin.payments.history');
-        Route::post('/refunds', [ PaymentController::class, 'refund' ])->name('admin.payments.refunds');
+        Route::get('/refunds', [ PaymentController::class, 'refund' ])->name('admin.payments.refunds');
         Route::post('/failures', [ PaymentController::class, 'handleFailures' ])->name('admin.payments.failures');
         Route::post('/coupons', [ PaymentController::class, 'createCoupon' ])->name('admin.payments.coupons.create');
         Route::get('/coupons/usage', [ PaymentController::class, 'couponUsage' ])->name('admin.payments.coupons.usage');
@@ -224,11 +224,11 @@ Route::prefix('admin')->middleware([ 'auth', 'role:admin|super-admin' ])->group(
 
     // System Settings Routes
     Route::prefix('settings')->group(function () {
-        Route::post('/general', [ SystemSettingController::class, 'general' ])->name('admin.settings.general');
-        Route::post('/security', [ SystemSettingController::class, 'security' ])->name('admin.settings.security');
-        Route::post('/integrations', [ SystemSettingController::class, 'integrations' ])->name('admin.settings.integrations');
-        Route::post('/exam-integrity', [ SystemSettingController::class, 'examIntegrity' ])->name('admin.settings.exam-integrity');
-        Route::post('/maintenance', [ SystemSettingController::class, 'maintenance' ])->name('admin.settings.maintenance');
+        Route::get('/general', [ SystemSettingController::class, 'general' ])->name('admin.settings.general');
+        Route::get('/security', [ SystemSettingController::class, 'security' ])->name('admin.settings.security');
+        Route::get('/integrations', [ SystemSettingController::class, 'integrations' ])->name('admin.settings.integrations');
+        Route::get('/exam-integrity', [ SystemSettingController::class, 'examIntegrity' ])->name('admin.settings.exam-integrity');
+        Route::get('/maintenance', [ SystemSettingController::class, 'maintenance' ])->name('admin.settings.maintenance');
     });
 
     // Content Approval Workflow Routes
@@ -242,9 +242,7 @@ Route::prefix('admin')->middleware([ 'auth', 'role:admin|super-admin' ])->group(
     });
 
     // Future Enhancements Routes
-    Route::prefix('future-enhancements')->group(function () {
-        Route::post('/ai-study-plans', [ FutureEnhancementController::class, 'configureAIStudyPlans' ])->name('admin.future.ai-study-plans');
-        Route::get('/ai-study-plans/effectiveness', [ FutureEnhancementController::class, 'aiStudyPlanEffectiveness' ])->name('admin.future.ai-study-plans.effectiveness');
+    Route::prefix('future-enhancements')->group(function () {                
         Route::post('/vr-settings', [ FutureEnhancementController::class, 'vrSettings' ])->name('admin.future.vr-settings');
         Route::post('/blockchain-certificates', [ FutureEnhancementController::class, 'blockchainCertificates' ])->name('admin.future.blockchain-certificates');
         Route::get('/blockchain-certificates/verify', [ FutureEnhancementController::class, 'verifyCertificates' ])->name('admin.future.blockchain-certificates.verify');

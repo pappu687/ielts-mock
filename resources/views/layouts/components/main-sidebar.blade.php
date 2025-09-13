@@ -308,11 +308,7 @@
                         <li class="slide {{ request()->is('admin/settings/maintenance') ? 'active' : '' }}">
                             <a href="{{ route('admin.settings.maintenance') }}" class="side-menu__item">
                                 Maintenance</a>
-                        </li>
-                        <li class="slide {{ request()->is('admin/future-enhancements*') ? 'active' : '' }}">
-                            <a href="{{ route('admin.future.ai-study-plans') }}" class="side-menu__item">
-                                Future Enhancements</a>
-                        </li>
+                        </li>                        
                     </ul>
                 </li>
 
