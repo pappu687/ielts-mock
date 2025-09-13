@@ -393,6 +393,11 @@ let headerToggleBtn, WindowPreSize;
   if (html.getAttribute("data-vertical-style") === "detached") {
     html.removeAttribute("data-toggled");
   }
+  
+  // Ensure menu starts expanded for overlay style
+  if (html.getAttribute("data-vertical-style") === "overlay" && !localStorage.getItem("vyzorlayout")) {
+    html.removeAttribute("data-toggled");
+  }
 
   if (
     (html.getAttribute("data-nav-style") === "menu-hover" ||
@@ -465,7 +470,7 @@ export function toggleSidemenu() {
   let sidemenuType = html.getAttribute("data-nav-layout");
 
   if (window.innerWidth >= 992) {
-    if (sidemenuType === "vertical") {
+    if (sidemenuType === "vertical") {      
       sidebar.removeEventListener("mouseenter", mouseEntered);
       sidebar.removeEventListener("mouseleave", mouseLeave);
       sidebar.removeEventListener("click", icontextOpen);
@@ -489,17 +494,16 @@ export function toggleSidemenu() {
           }
           break;
         // icon-overlay
-        case "overlay":
+        case "overlay":                    
           html.removeAttribute("data-nav-style");
-          if (html.getAttribute("data-toggled") === "icon-overlay-close") {
+          if (html.getAttribute("data-toggled") === "icon-overlay-close") {            
+            
             html.removeAttribute("data-toggled", "icon-overlay-close");
             sidebar.removeEventListener("mouseenter", mouseEntered);
             sidebar.removeEventListener("mouseleave", mouseLeave);
-          } else {
-            if (window.innerWidth >= 992) {
-              if (!localStorage.getItem("vyzorlayout")) {
-                html.setAttribute("data-toggled", "icon-overlay-close");
-              }
+          } else {            
+            if (window.innerWidth >= 992) {              
+              html.setAttribute("data-toggled", "icon-overlay-close");
               sidebar.addEventListener("mouseenter", mouseEntered);
               sidebar.addEventListener("mouseleave", mouseLeave);
             } else {
@@ -596,7 +600,7 @@ export function toggleSidemenu() {
             clearNavDropdown();
           }
           break;
-        case "icon-click":
+        case "icon-click":          
           if (html.getAttribute("data-toggled") === "icon-click-closed") {
             html.removeAttribute("data-toggled");
           } else {

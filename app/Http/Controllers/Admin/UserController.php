@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Helpers\DataTableHelper;
+use App\Http\Requests\StoreUserRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 use Yajra\DataTables\Facades\DataTables;
 
 class UserController extends Controller
@@ -21,9 +24,48 @@ class UserController extends Controller
         return view('admin.users.create');
     }
 
-    public function store(Request $request)
+    public function store(StoreUserRequest $request)
     {
-        return view('admin.users.store');
+        try {
+            // Prepare user data
+            $userData = $request->validated();
+            
+            // Generate a temporary password
+            $tempPassword = Str::random(12);
+            
+            // Create the user
+            $user = User::create([
+                'first_name' => $userData['first_name'],
+                'last_name' => $userData['last_name'],
+                'name' => $userData['first_name'] . ' ' . $userData['last_name'],
+                'email' => $userData['email'],
+                'password' => Hash::make($tempPassword),
+                'date_of_birth' => $userData['date_of_birth'] ?? null,
+                'phone' => $userData['phone'] ?? null,
+                'street' => $userData['street'] ?? null,
+                'landmark' => $userData['landmark'] ?? null,
+                'city' => $userData['city'] ?? null,
+                'state' => $userData['state'] ?? null,
+                'postal_code' => $userData['postal_code'] ?? null,
+                'country' => $userData['country'] ?? null,
+                'email_verified_at' => null, // User needs to verify email
+            ]);
+
+            // Send activation email if requested
+            if ($request->has('send_activation_email') && $request->send_activation_email) {
+                // TODO: Implement email sending logic here
+                // For now, we'll just log that it was requested
+                \Log::info("Activation email requested for user: {$user->email}");
+            }
+
+            return redirect()->route('admin.users.index')
+                ->with('success', 'User created successfully!');
+                
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Failed to create user. Please try again.');
+        }
     }
     
     public function show(User $user)
@@ -67,8 +109,8 @@ class UserController extends Controller
             return DataTables::of($users)
                 ->addColumn('status', function ($user) {
                     return $user->email_verified_at ? 
-                        '<span class="badge badge-success">Active</span>' : 
-                        '<span class="badge badge-outline-warning">Pending</span>';
+                        '<span class="badge bg-success-transparent">Active</span>' : 
+                        '<span class="badge bg-warning-transparent">Pending</span>';
                 })
                 ->editColumn('email_verified_at', function ($user) {
                     return $user->email_verified_at ? 'Yes' : 'No';
@@ -78,10 +120,10 @@ class UserController extends Controller
                 })
                 ->addColumn('actions', function ($user) {
                     $actions = '<div class="btn-group btn-group-sm" role="group">';
-                    $actions .= '<a href="' . route('admin.users.show', $user->id) . '" class="btn btn-sm btn-outline-info">View</a>';
-                    $actions .= '<a href="' . route('admin.users.update', $user->id) . '" class="btn btn-sm btn-outline-primary">Edit</a>';
-                    $actions .= '<button type="button" class="btn btn-sm btn-outline-warning" onclick="suspendUser(' . $user->id . ')">Suspend</button>';
-                    $actions .= '<button type="button" class="btn btn-sm btn-outline-danger" onclick="deactivateUser(' . $user->id . ')">Deactivate</button>';
+                    $actions .= '<a href="' . route('admin.users.show', $user->id) . '" class="btn btn-sm btn-info-light">View</a>';
+                    $actions .= '<a href="' . route('admin.users.update', $user->id) . '" class="btn btn-sm btn-primary-light">Edit</a>';
+                    $actions .= '<button type="button" class="btn btn-sm btn-warning-light" onclick="suspendUser(' . $user->id . ')">Suspend</button>';
+                    $actions .= '<button type="button" class="btn btn-sm btn-danger-light" onclick="deactivateUser(' . $user->id . ')">Deactivate</button>';
                     $actions .= '</div>';
                     return $actions;
                 })

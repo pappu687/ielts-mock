@@ -1,3 +1,5 @@
+import "./defaultmenu.js";
+
 (function () {
   "use strict";
 

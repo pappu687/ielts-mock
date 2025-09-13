@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="transparent"
-    data-width="fullwidth" data-menu-styles="transparent" data-page-style="flat" data-toggled="close"
-    data-vertical-style="doublemenu" data-toggled="double-menu-open" style="--primary-rgb: 114, 9, 183" loader="true">
+<html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light"
+    data-width="fullwidth" data-menu-styles="color" data-page-style="modern" loader="disable" data-vertical-style="overlay"
+    data-header-position="fixed" style="--primary-rgb: 39, 64, 96;--secondary-rgb: 138, 48, 51">
 
 <head>
 
@@ -57,7 +57,32 @@
         <!-- End::main-sidebar -->
 
         <!-- Start::app-content -->
-        <div class="main-content app-content">
+        <div class="main-content app-content p-0">
+            @if (session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <ul class="mb-0">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <div class="container-fluid page-container main-body-containers">
 
                 {{ $slot }}
@@ -81,9 +106,15 @@
     <!-- Scripts -->
     @include('layouts.components.scripts')
 
-    <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.3.4/b-3.2.5/b-colvis-3.2.5/b-html5-3.2.5/cc-1.1.0/date-1.6.0/fc-5.0.5/fh-4.0.3/kt-2.12.1/r-3.0.6/sc-2.4.3/sp-2.3.5/sr-1.4.2/datatables.min.css" rel="stylesheet" integrity="sha384-btiz0S5dn1vibXcziWDYlR1o7CtEqE1ofIMGfKmQwDtgPyvzU4hZKq112G2qkAjm" crossorigin="anonymous">
- 
-<script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.3.4/b-3.2.5/b-colvis-3.2.5/b-html5-3.2.5/cc-1.1.0/date-1.6.0/fc-5.0.5/fh-4.0.3/kt-2.12.1/r-3.0.6/sc-2.4.3/sp-2.3.5/sr-1.4.2/datatables.min.js" integrity="sha384-REMno7IyiqtAQsyEig3nd0I4db0frYjV2SOt2/htb3yQ09S1mB8Jfncx8ukgMZNz" crossorigin="anonymous"></script>
+    <link
+        href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.3.4/b-3.2.5/b-colvis-3.2.5/b-html5-3.2.5/cc-1.1.0/date-1.6.0/fc-5.0.5/fh-4.0.3/kt-2.12.1/r-3.0.6/sc-2.4.3/sp-2.3.5/sr-1.4.2/datatables.min.css"
+        rel="stylesheet" integrity="sha384-btiz0S5dn1vibXcziWDYlR1o7CtEqE1ofIMGfKmQwDtgPyvzU4hZKq112G2qkAjm"
+        crossorigin="anonymous">
+
+    <script
+        src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.3.4/b-3.2.5/b-colvis-3.2.5/b-html5-3.2.5/cc-1.1.0/date-1.6.0/fc-5.0.5/fh-4.0.3/kt-2.12.1/r-3.0.6/sc-2.4.3/sp-2.3.5/sr-1.4.2/datatables.min.js"
+        integrity="sha384-REMno7IyiqtAQsyEig3nd0I4db0frYjV2SOt2/htb3yQ09S1mB8Jfncx8ukgMZNz" crossorigin="anonymous">
+    </script>
 
     <!-- Sticky JS -->
     <script src="{{ asset('build/assets/sticky.js') }}"></script>

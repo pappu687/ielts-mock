@@ -1,19 +1,19 @@
 <x-backend-layout>
-    <div class="container-fluid">
+    <div class="container-fluid mt-2">
         <div class="row">
             <div class="col-12">
                 <div class="card custom-card">
                     <div class="card-header justify-content-between p-3">
                         <div class="card-title">All Users</div>
-                        <a href="{{ route('admin.users.create') }}" class="btn btn-primary"><i
+                        <a href="{{ route('admin.users.create') }}" class="btn btn-secondary"><i
                                 class="ri-add-line align-middle me-1 fw-medium d-inline-block"></i>Create New User</a>
                     </div>
-                    <div class="card-body">
-                        <table id="users-table" class="table table-bordered text-nowrap w-100 table-striped my-3">
+                    <div class="card-body pt-0">
+                        <table id="users-table" class="table table-bordered w-100 table-striped my-3 border-bottom">
                             <thead>
                                 <tr>
                                     @foreach ($columns as $column)
-                                        <th>{{ $column['title'] }}</th>
+                                        <th class="bg-primary-transparent">{{ $column['title'] }}</th>
                                     @endforeach
                                 </tr>
                             </thead>
@@ -53,8 +53,7 @@
                     language: {
                         processing: '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>'                        
                     },                    
-                    autoWidth: false,
-                    responsive: true
+                    autoWidth: false                    
                 });
 
                 // Custom functions for user actions
