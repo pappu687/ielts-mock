@@ -15,14 +15,14 @@ class SetupUsers extends Command
      *
      * @var string
      */
-    protected $signature = 'ielts:setup {--fresh : Delete existing data and start fresh}';
+    protected $signature = 'app:setup {--fresh : Delete existing data and start fresh}';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Setup IELTS system with roles, permissions, and demo users';
+    protected $description = 'Setup Application with roles, permissions, and demo users';
 
     /**
      * Define permissions for the IELTS system
@@ -114,34 +114,39 @@ class SetupUsers extends Command
      */
     protected $demoUsers = [
         [
-            'name'     => 'Super Admin',
-            'email'    => 'superadmin@ielts.test',
-            'password' => 'password123',
-            'role'     => 'super-admin',
+            'first_name' => 'Super',
+            'last_name'  => 'Admin',
+            'email'      => 'superadmin@ielts.test',
+            'password'   => 'password123',
+            'role'       => 'super-admin',
          ],
         [
-            'name'     => 'System Admin',
-            'email'    => 'admin@ielts.test',
-            'password' => 'password123',
-            'role'     => 'admin',
+            'first_name' => 'System',
+            'last_name'  => 'Admin',
+            'email'      => 'admin@ielts.test',
+            'password'   => 'password123',
+            'role'       => 'admin',
          ],
         [
-            'name'     => 'John Instructor',
-            'email'    => 'instructor@ielts.test',
-            'password' => 'password123',
-            'role'     => 'instructor',
+            'first_name' => 'John',
+            'last_name'  => 'Instructor',
+            'email'      => 'instructor@ielts.test',
+            'password'   => 'password123',
+            'role'       => 'instructor',
          ],
         [
-            'name'     => 'Jane Student',
-            'email'    => 'student@ielts.test',
-            'password' => 'password123',
-            'role'     => 'student',
+            'first_name' => 'Jane',
+            'last_name'  => 'Student',
+            'email'      => 'student@ielts.test',
+            'password'   => 'password123',
+            'role'       => 'student',
          ],
         [
-            'name'     => 'Guest User',
-            'email'    => 'guest@ielts.test',
-            'password' => 'password123',
-            'role'     => 'guest',
+            'first_name' => 'Guest',
+            'last_name'  => 'User',
+            'email'      => 'guest@ielts.test',
+            'password'   => 'password123',
+            'role'       => 'guest',
          ],
      ];
 
@@ -150,7 +155,7 @@ class SetupUsers extends Command
      */
     public function handle()
     {
-        $this->info('🚀 Setting up IELTS system...');
+        $this->info('🚀 Setting up Application ...');
 
         if ($this->option('fresh')) {
             $this->handleFreshSetup();
@@ -173,7 +178,7 @@ class SetupUsers extends Command
 
             DB::commit();
 
-            $this->info('✅ IELTS system setup completed successfully!');
+            $this->info('✅ Application setup completed successfully!');
             $this->displaySummary();
 
         } catch (\Exception $e) {
@@ -280,7 +285,8 @@ class SetupUsers extends Command
 
             if (! $user) {
                 $user = User::create([
-                    'name'              => $userData[ 'name' ],
+                    'first_name'        => $userData[ 'first_name' ],
+                    'last_name'         => $userData[ 'last_name' ],
                     'email'             => $userData[ 'email' ],
                     'email_verified_at' => now(),
                     'password'          => Hash::make($userData[ 'password' ]),
@@ -325,6 +331,6 @@ class SetupUsers extends Command
 
         $this->newLine();
         $this->warn('⚠️  Important: Change default passwords in production!');
-        $this->info('💡 Run with --fresh flag to reset everything: php artisan ielts:setup --fresh');
+        $this->info('💡 Run with --fresh flag to reset everything: php artisan app:setup --fresh');
     }
 }

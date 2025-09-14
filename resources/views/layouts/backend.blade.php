@@ -57,7 +57,7 @@
         <!-- End::main-sidebar -->
 
         <!-- Start::app-content -->
-        <div class="main-content app-content p-0">        
+        <div class="main-content app-content p-0">
             <div class="container-fluid page-container pt-2">
                 @include('layouts.components.flash-messages')
 
@@ -86,17 +86,21 @@
         href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.3.4/b-3.2.5/b-colvis-3.2.5/b-html5-3.2.5/cc-1.1.0/date-1.6.0/fc-5.0.5/fh-4.0.3/kt-2.12.1/r-3.0.6/sc-2.4.3/sp-2.3.5/sr-1.4.2/datatables.min.css"
         rel="stylesheet" integrity="sha384-btiz0S5dn1vibXcziWDYlR1o7CtEqE1ofIMGfKmQwDtgPyvzU4hZKq112G2qkAjm"
         crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.23.0/sweetalert2.min.css"
+        integrity="sha512-Ivy7sPrd6LPp20adiK3al16GBelPtqswhJnyXuha3kGtmQ1G2qWpjuipfVDaZUwH26b3RDe8x707asEpvxl7iA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <script
         src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.3.4/b-3.2.5/b-colvis-3.2.5/b-html5-3.2.5/cc-1.1.0/date-1.6.0/fc-5.0.5/fh-4.0.3/kt-2.12.1/r-3.0.6/sc-2.4.3/sp-2.3.5/sr-1.4.2/datatables.min.js"
         integrity="sha384-REMno7IyiqtAQsyEig3nd0I4db0frYjV2SOt2/htb3yQ09S1mB8Jfncx8ukgMZNz" crossorigin="anonymous">
     </script>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert2/11.23.0/sweetalert2.all.min.js"
+        integrity="sha512-J+4Nt/+nieSNJjQGCPb8jKf5/wv31QiQM10bOotEHUKc9tB1Pn0gXQS6XXPtDoQhHHao5poTnSByMInzafUqzA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <!-- Sticky JS -->
     <script src="{{ asset('build/assets/sticky.js') }}"></script>
-
-    <!-- Custom-Switcher JS -->
-    @vite('resources/assets/js/custom-switcher.js')
 
     <!-- App JS-->
     @vite('resources/js/app.js')

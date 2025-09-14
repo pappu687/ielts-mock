@@ -49,26 +49,125 @@
                     layout: {
                         topEnd: 'pageLength',
                         topStart: 'info'
-                    },                    
+                    },
                     language: {
-                        processing: '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>'                        
-                    },                    
-                    autoWidth: false                    
+                        processing: '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>'
+                    },
+                    autoWidth: false
                 });
 
                 // Custom functions for user actions
                 window.suspendUser = function(userId) {
-                    if (confirm('Are you sure you want to suspend this user?')) {
-                        // Implement suspend logic here
-                        console.log('Suspending user:', userId);
-                    }
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You want to suspend this user?",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, suspend!',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Show loading
+                            Swal.fire({
+                                title: 'Processing...',
+                                text: 'Please wait while we suspend the user.',
+                                allowOutsideClick: false,
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                }
+                            });
+
+                            // Make Ajax request
+                            $.ajax({
+                                url: '{{ route('admin.users.suspend', ':id') }}'.replace(':id',
+                                    userId),
+                                type: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                success: function(response) {
+                                    Swal.fire(
+                                        'Suspended!',
+                                        response.message,
+                                        'success'
+                                    ).then(() => {
+                                        // Reload DataTable
+                                        table.ajax.reload();
+                                    });
+                                },
+                                error: function(xhr) {
+                                    let message = 'Failed to suspend user. Please try again.';
+                                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                                        message = xhr.responseJSON.message;
+                                    }
+                                    Swal.fire(
+                                        'Error!',
+                                        message,
+                                        'error'
+                                    );
+                                }
+                            });
+                        }
+                    });
                 };
 
                 window.deactivateUser = function(userId) {
-                    if (confirm('Are you sure you want to deactivate this user?')) {
-                        // Implement deactivate logic here
-                        console.log('Deactivating user:', userId);
-                    }
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You want to deactivate this user? This action cannot be undone!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, deactivate!',
+                        cancelButtonText: 'Cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // Show loading
+                            Swal.fire({
+                                title: 'Processing...',
+                                text: 'Please wait while we deactivate the user.',
+                                allowOutsideClick: false,
+                                didOpen: () => {
+                                    Swal.showLoading();
+                                }
+                            });
+
+                            // Make Ajax request
+                            $.ajax({
+                                url: '{{ route('admin.users.deactivate', ':id') }}'.replace(':id',
+                                    userId),
+                                type: 'DELETE',
+                                headers: {
+                                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                                },
+                                success: function(response) {
+                                    Swal.fire(
+                                        'Deactivated!',
+                                        response.message,
+                                        'success'
+                                    ).then(() => {
+                                        // Reload DataTable
+                                        table.ajax.reload();
+                                    });
+                                },
+                                error: function(xhr) {
+                                    let message =
+                                        'Failed to deactivate user. Please try again.';
+                                    if (xhr.responseJSON && xhr.responseJSON.message) {
+                                        message = xhr.responseJSON.message;
+                                    }
+                                    Swal.fire(
+                                        'Error!',
+                                        message,
+                                        'error'
+                                    );
+                                }
+                            });
+                        }
+                    });
                 };
             });
         </script>
