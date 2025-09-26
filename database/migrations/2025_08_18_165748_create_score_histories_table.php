@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('score_history', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->foreignId('exam_session_id')->nullable()->constrained()->onDelete('set null');
+            $table->unsignedBigInteger('user_id'); // Foreign key constraint removed - managed at application level
+            $table->unsignedBigInteger('exam_session_id')->nullable(); // Foreign key constraint removed - managed at application level
             $table->string('skill_type');
             $table->decimal('band_score', 3, 1);
             $table->json('sub_scores')->nullable();

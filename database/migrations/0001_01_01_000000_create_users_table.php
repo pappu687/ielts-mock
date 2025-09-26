@@ -33,8 +33,11 @@ return new class extends Migration
             $table->string('profile_image')->nullable();
             $table->string('timezone')->nullable();
             $table->json('preferences')->nullable();
+            $table->timestamp('suspended_at')->nullable();
+            $table->timestamp('deactivated_at')->nullable();
 
             $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();
         });
 
@@ -46,7 +49,7 @@ return new class extends Migration
 
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
-            $table->foreignId('user_id')->nullable()->index();
+            $table->unsignedBigInteger('user_id')->nullable()->index(); // Foreign key constraint removed - managed at application level
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
             $table->longText('payload');

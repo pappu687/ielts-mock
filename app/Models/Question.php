@@ -12,7 +12,8 @@ class Question extends Model
 
     protected $fillable = [
         'question_bank_id',
-        'type',
+        'question_type',
+        'question_text',
         'content',
         'difficulty_level',
         'estimated_time',

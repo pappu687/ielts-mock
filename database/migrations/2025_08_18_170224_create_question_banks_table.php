@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('skill_type');
             $table->text('description')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->foreignId('created_by')->nullable()->constrained('users')->onDelete('set null');
+            $table->unsignedBigInteger('created_by')->nullable(); // Foreign key constraint removed - managed at application level
             $table->timestamps();
         });
     }

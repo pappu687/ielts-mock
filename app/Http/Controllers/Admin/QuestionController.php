@@ -12,7 +12,7 @@ class QuestionController extends Controller
 {
     public function index()
     {
-        $columns = DataTableHelper::getColumns('questions');
+        $columns = DataTableHelper::getColumns('questions');        
         return view('admin.questions.index', compact('columns'));
     }
 
@@ -42,7 +42,7 @@ class QuestionController extends Controller
     public function listQuestions(Request $request)
     {
         if ($request->ajax()) {
-            $questions = Question::select(['id', 'question_text', 'question_type', 'difficulty', 'is_approved', 'created_at']);
+            $questions = Question::select(['id', 'question_text', 'question_type', 'created_at']);
             
             return DataTables::of($questions)
                 ->addColumn('is_approved', function ($question) {
@@ -60,12 +60,26 @@ class QuestionController extends Controller
                     return $question->created_at->format('Y-m-d H:i:s');
                 })
                 ->addColumn('actions', function ($question) {
-                    $actions = '<div class="btn-group btn-group-sm" role="group">';
-                    $actions .= '<a href="#" class="btn btn-sm btn-outline-info">View</a>';
-                    $actions .= '<a href="#" class="btn btn-sm btn-outline-primary">Edit</a>';
-                    $actions .= '<button type="button" class="btn btn-sm btn-outline-success" onclick="approveQuestion(' . $question->id . ')">Approve</button>';
-                    $actions .= '<button type="button" class="btn btn-sm btn-outline-danger" onclick="deleteQuestion(' . $question->id . ')">Delete</button>';
+                    $actions = '<div class="btn-group btn-group-sm">';
+
+                    // Primary action button (View)
+                    $actions .= '<a href="#" class="btn btn-primary">View</a>';
+
+                    // Dropdown toggle button
+                    $actions .= '<button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split me-2" data-bs-toggle="dropdown" aria-expanded="false">';
+                    $actions .= '<span class="visually-hidden">Toggle Dropdown</span>';
+                    $actions .= '</button>';
+
+                    // Dropdown menu
+                    $actions .= '<ul class="dropdown-menu dropdown-menu-end">';
+                    $actions .= '<li><a class="dropdown-item" href="#">Edit</a></li>';
+                    $actions .= '<li><a class="dropdown-item" href="javascript:void(0);" onclick="approveQuestion(' . $question->id . ')">Approve</a></li>';
+                    $actions .= '<li><a class="dropdown-item" href="javascript:void(0);" onclick="updateMetadata(' . $question->id . ')">Update Metadata</a></li>';
+                    $actions .= '<li><hr class="dropdown-divider"></li>';
+                    $actions .= '<li><a class="dropdown-item text-danger" href="javascript:void(0);" onclick="deleteQuestion(' . $question->id . ')">Delete</a></li>';
+                    $actions .= '</ul>';
                     $actions .= '</div>';
+
                     return $actions;
                 })
                 ->rawColumns(['is_approved', 'actions', 'question_text', 'created_at'])

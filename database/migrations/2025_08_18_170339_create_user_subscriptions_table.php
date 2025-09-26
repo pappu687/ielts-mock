@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('user_id'); // Foreign key constraint removed - managed at application level
             $table->string('plan_type');
             $table->string('status');
             $table->timestamp('starts_at');

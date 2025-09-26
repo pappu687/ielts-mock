@@ -14,7 +14,7 @@
                                 <tr>
                                     @foreach ($columns as $column)
                                         <th>{{ $column['title'] }}</th>
-                                    @endforeach
+                                    @endforeach                                                               
                                 </tr>
                             </thead>
                             <tbody>
@@ -35,7 +35,7 @@
                     serverSide: true,
                     ajax: {
                         url: '{{ route('admin.questions.list') }}',
-                        type: 'GET'
+                        type: 'POST'
                     },
                     columns: @json($columns),
                     order: [
@@ -54,7 +54,7 @@
                         processing: '<div class="spinner-border text-primary" role="status"><span class="visually-hidden">Loading...</span></div>'                        
                     },                    
                     autoWidth: false,
-                    responsive: true
+                    responsive: false
                 });
 
                 // Custom functions for question actions

@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('responses', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('exam_section_id')->constrained()->onDelete('cascade');
-            $table->foreignId('question_id')->nullable()->constrained()->onDelete('set null');
+            $table->unsignedBigInteger('exam_section_id'); // Foreign key constraint removed - managed at application level
+            $table->unsignedBigInteger('question_id')->nullable(); // Foreign key constraint removed - managed at application level
             $table->json('user_response')->nullable();
             $table->integer('time_spent')->nullable();
             $table->boolean('is_correct')->nullable();

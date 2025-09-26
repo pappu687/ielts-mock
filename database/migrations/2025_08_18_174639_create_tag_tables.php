@@ -20,7 +20,7 @@ return new class extends Migration
         });
 
         Schema::create('taggables', function (Blueprint $table) {
-            $table->foreignId('tag_id')->constrained()->cascadeOnDelete();
+            $table->unsignedBigInteger('tag_id'); // Foreign key constraint removed - managed at application level
 
             $table->morphs('taggable');
 

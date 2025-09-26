@@ -69,15 +69,9 @@
                         @error('street')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
-                    </div>
-                    <div class="col-xl-12 mb-3">
-                        <input type="text" name="landmark" class="form-control @error('landmark') is-invalid @enderror" 
-                               placeholder="Landmark" aria-label="Landmark" value="{{ old('landmark') }}">
-                        @error('landmark')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+                    </div>                    
                     <div class="col-xl-6 mb-3">
+                        <label class="form-label">City</label>
                         <input type="text" name="city" class="form-control @error('city') is-invalid @enderror" 
                                placeholder="City" aria-label="City" value="{{ old('city') }}">
                         @error('city')
@@ -85,6 +79,7 @@
                         @enderror
                     </div>
                     <div class="col-xl-6 mb-3">
+                        <label class="form-label">State/Province</label>
                         <select name="state" id="inputState1" class="form-select @error('state') is-invalid @enderror">
                             <option value="">State/Province</option>
                             <option value="California" {{ old('state') == 'California' ? 'selected' : '' }}>California</option>
@@ -97,6 +92,7 @@
                         @enderror
                     </div>
                     <div class="col-xl-6 mb-3">
+                        <label class="form-label">Postal/Zip code</label>
                         <input type="text" name="postal_code" class="form-control @error('postal_code') is-invalid @enderror" 
                                placeholder="Postal/Zip code" aria-label="Postal/Zip code" value="{{ old('postal_code') }}">
                         @error('postal_code')
@@ -104,6 +100,7 @@
                         @enderror
                     </div>
                     <div class="col-xl-6 mb-3">
+                        <label class="form-label">Country</label>
                         <select name="country" id="inputCountry" class="form-select @error('country') is-invalid @enderror">
                             <option value="">Country</option>
                             <option value="United States" {{ old('country') == 'United States' ? 'selected' : '' }}>United States</option>

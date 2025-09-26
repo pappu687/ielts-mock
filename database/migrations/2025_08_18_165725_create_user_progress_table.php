@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_progress', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('user_id'); // Foreign key constraint removed - managed at application level
             $table->string('skill_type');
             $table->decimal('current_level', 3, 1);
             $table->decimal('target_level', 3, 1);

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('user_profiles', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('user_id'); // Foreign key constraint removed - managed at application level
             $table->date('date_of_birth')->nullable();
             $table->string('gender')->nullable();
             $table->string('education_level')->nullable();

@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('exam_sections', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('exam_session_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('exam_session_id'); // Foreign key constraint removed - managed at application level
             $table->string('section_type');
             $table->string('status');
             $table->timestamp('start_time')->nullable();

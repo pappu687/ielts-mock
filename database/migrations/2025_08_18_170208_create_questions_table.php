@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('question_bank_id')->constrained()->onDelete('cascade');
-            $table->string('type');
+            $table->unsignedBigInteger('question_bank_id');            
             $table->json('content');
             $table->string('difficulty_level');
             $table->integer('estimated_time');
@@ -23,6 +22,8 @@ return new class extends Migration
             $table->json('image_files')->nullable();
             $table->json('correct_answers')->nullable();
             $table->text('explanation')->nullable();
+            $table->mediumText('question_text')->nullable();
+            $table->string('question_type')->nullable();
             $table->text('tips')->nullable();
             $table->json('skill_focus_areas')->nullable();
             $table->timestamps();

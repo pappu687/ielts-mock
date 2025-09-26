@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('learning_analytics', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('user_id'); // Foreign key constraint removed - managed at application level
             $table->string('skill_type');
             $table->string('question_type');
             $table->decimal('accuracy_rate', 5, 2);

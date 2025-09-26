@@ -79,7 +79,7 @@
                             <a href="{{ route('admin.progress.index', 1) }}" class="side-menu__item">
                                 User Progress</a>
                         </li>
-                        <li class="slide {{ request()->is('admin/roles-permissions*') ? 'active' : '' }}">
+                        <li class="slide {{ request()->is('admin/roles*') ? 'active' : '' }}">
                             <a href="{{ route('admin.roles.index') }}" class="side-menu__item">
                                 Roles & Permissions</a>
                         </li>

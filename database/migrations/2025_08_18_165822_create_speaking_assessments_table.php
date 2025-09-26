@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('speaking_assessments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('exam_section_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('exam_section_id'); // Foreign key constraint removed - managed at application level
             $table->string('audio_file_path');
             $table->text('transcript')->nullable();
             $table->decimal('fluency_coherence_score', 3, 1)->nullable();

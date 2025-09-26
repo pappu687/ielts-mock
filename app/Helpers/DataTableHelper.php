@@ -33,8 +33,7 @@ class DataTableHelper
             'questions' => [
                 ['data' => 'id', 'name' => 'id', 'title' => 'ID'],
                 ['data' => 'question_text', 'name' => 'question_text', 'title' => 'Question'],
-                ['data' => 'question_type', 'name' => 'question_type', 'title' => 'Type'],
-                ['data' => 'difficulty', 'name' => 'difficulty', 'title' => 'Difficulty'],
+                ['data' => 'question_type', 'name' => 'question_type', 'title' => 'Type'],                
                 ['data' => 'is_approved', 'name' => 'is_approved', 'title' => 'Approved'],
                 ['data' => 'created_at', 'name' => 'created_at', 'title' => 'Created At'],
                 ['data' => 'actions', 'name' => 'actions', 'title' => 'Actions', 'orderable' => false, 'searchable' => false],
