@@ -12,7 +12,16 @@ class QuestionBankController extends Controller
 {
     public function index()
     {
-        $columns = DataTableHelper::getColumns('question_banks');
+        // Example 1: Using dynamic columns with exclusions
+        $excludeColumns = ['updated_at', 'created_by']; // Exclude these columns
+        $columns = DataTableHelper::getColumns('question_banks', $excludeColumns, true);
+        
+        // Example 2: Using static columns (backward compatibility)
+        // $columns = DataTableHelper::getColumns('question_banks');
+        
+        // Example 3: Using static columns with exclusions
+        // $columns = DataTableHelper::getColumns('question_banks', ['created_by', 'updated_at']);
+        
         return view('admin.question-banks.index', compact('columns'));
     }
 
@@ -47,7 +56,8 @@ class QuestionBankController extends Controller
     public function listQuestionBanks(Request $request)
     {
         if ($request->ajax()) {
-            $questionBanks = QuestionBank::select(['id', 'title', 'description', 'is_active', 'created_at']);
+            // Select columns that match the dynamic column structure
+            $questionBanks = QuestionBank::select(['id', 'name', 'description', 'difficulty_level', 'skill_type', 'is_active', 'created_at']);
             
             return DataTables::of($questionBanks)
                 ->addColumn('question_count', function ($questionBank) {
@@ -65,6 +75,12 @@ class QuestionBankController extends Controller
                 ->editColumn('created_at', function ($questionBank) {
                     return $questionBank->created_at->format('Y-m-d H:i:s');
                 })
+                ->editColumn('difficulty_level', function ($questionBank) {
+                    return ucfirst($questionBank->difficulty_level);
+                })
+                ->editColumn('skill_type', function ($questionBank) {
+                    return ucfirst($questionBank->skill_type);
+                })
                 ->addColumn('actions', function ($questionBank) {
                     $actions = '<div class="btn-group btn-group-sm" role="group">';
                     $actions .= '<a href="#" class="btn btn-sm btn-outline-info">View</a>';
@@ -74,7 +90,7 @@ class QuestionBankController extends Controller
                     $actions .= '</div>';
                     return $actions;
                 })
-                ->rawColumns(['is_active', 'actions', 'question_count', 'created_at'])
+                ->rawColumns(['is_active', 'actions'])
                 ->make(true);
         }
     }

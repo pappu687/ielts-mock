@@ -8,6 +8,8 @@ class WritingPrompt extends Model
 {
     use HasFactory;
 
+    protected $table = 'writing_prompts';
+
     protected $fillable = [
         'task_type',
         'prompt_text',

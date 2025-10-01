@@ -37,11 +37,11 @@ class SpeakingQuestionController extends Controller
     public function listSpeakingQuestions(Request $request)
     {
         if ($request->ajax()) {
-            $speakingQuestions = SpeakingQuestion::select(['id', 'question_text', 'part', 'difficulty_level', 'preparation_time', 'created_at']);
+            $speakingQuestions = SpeakingQuestion::select(['id', 'question_text', 'part_number', 'difficulty_level', 'time_limit', 'created_at']);
             
             return DataTables::of($speakingQuestions)
-                ->addColumn('preparation_time', function ($speakingQuestion) {
-                    return $speakingQuestion->preparation_time ? $speakingQuestion->preparation_time . ' seconds' : 'N/A';
+                ->addColumn('time_limit', function ($speakingQuestion) {
+                    return $speakingQuestion->time_limit ? $speakingQuestion->time_limit . ' seconds' : 'N/A';
                 })
                 ->editColumn('question_text', function ($speakingQuestion) {
                     return \Str::limit($speakingQuestion->question_text, 50);
@@ -58,7 +58,7 @@ class SpeakingQuestionController extends Controller
                     $actions .= '</div>';
                     return $actions;
                 })
-                ->rawColumns(['actions', 'question_text', 'preparation_time', 'created_at'])
+                ->rawColumns(['actions', 'question_text', 'time_limit', 'created_at'])
                 ->make(true);
         }
     }

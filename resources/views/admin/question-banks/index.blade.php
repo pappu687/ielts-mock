@@ -35,7 +35,7 @@
                     serverSide: true,
                     ajax: {
                         url: '{{ route('admin.question-banks.list') }}',
-                        type: 'GET'
+                        type: 'POST'
                     },
                     columns: @json($columns),
                     order: [

@@ -37,7 +37,7 @@ class ReadingPassageController extends Controller
     public function listReadingPassages(Request $request)
     {
         if ($request->ajax()) {
-            $readingPassages = ReadingPassage::select(['id', 'title', 'category', 'word_count', 'difficulty_level', 'created_at']);
+            $readingPassages = ReadingPassage::select(['id', 'title', 'topic_category', 'word_count', 'difficulty_level', 'created_at']);
             
             return DataTables::of($readingPassages)
                 ->addColumn('word_count', function ($readingPassage) {

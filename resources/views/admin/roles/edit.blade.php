@@ -1,20 +1,13 @@
-<x-admin-layout>
-    <div class="container-fluid">
-        <div class="d-md-flex d-block align-items-center justify-content-between my-3 page-header-breadcrumb">
-            <h1 class="page-title fw-semibold fs-18 mb-0">
-                Edit User Role
-            </h1>
-            <div class="ms-md-1 ms-0">
-                <a class="btn btn-md btn-outline-dark" href="{{ route('admin.roles.index') }}">
+<x-backend-layout>
+    <div class="container-fluid">        
+        <div class="card custom-card mt-3 rounded-3">
+            <div class="card-header justify-content-between">
+                <div class="card-title">
+                    Edit User Role
+                </div>
+                    <a class="btn btn-md btn-outline-primary rounded-3" href="{{ route('admin.roles.index') }}">
                     All Roles
                 </a>
-            </div>
-        </div>
-        <div class="card custom-card">
-            <div class="card-header">
-                <div class="card-title">
-                    {{ trans('global.edit') }} {{ trans('cruds.role.title_singular') }}
-                </div>
             </div>
 
             <div class="card-body">
@@ -22,43 +15,46 @@
                     enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="form-group {{ $errors->has('name') ? 'has-error' : '' }}">
-                        <label for="name">{{ trans('cruds.role.fields.title') }}*</label>
+                    <div class="form-group mb-3 {{ $errors->has('name') ? 'has-error' : '' }}">
+                        <label for="name">Role Name*</label>
                         <input type="text" id="name" name="name" class="form-control"
                             value="{{ old('name', isset($role) ? $role->name : '') }}" required>
                         @if ($errors->has('name'))
                             <em class="invalid-feedback">
                                 {{ $errors->first('name') }}
                             </em>
-                        @endif
-                        <p class="helper-block">
-                            {{ trans('cruds.role.fields.title_helper') }}
-                        </p>
+                        @endif                        
                     </div>
-                    <div class="form-group {{ $errors->has('permission') ? 'has-error' : '' }}">
-                        <label for="permission">{{ trans('cruds.role.fields.permissions') }}*
-                            <span class="btn btn-info btn-sm select-all">{{ trans('global.select_all') }}</span>
-                            <span
-                                class="btn btn-info btn-sm deselect-all">{{ trans('global.deselect_all') }}</span></label>
-                        <select name="permission[]" id="permission" class="form-select select2 mt-2" multiple="multiple"
-                            required>
-                            @foreach ($permissions as $id => $permissions)
-                                <option value="{{ $id }}"
-                                    {{ in_array($id, old('permissions', [])) || (isset($role) && $role->permissions()->pluck('name', 'id')->contains($id)) ? 'selected' : '' }}>
-                                    {{ $permissions }}</option>
+                    <div class="form-group mb-3 {{ $errors->has('permission') ? 'has-error' : '' }}">
+                        <label>Permissions*</label>
+                        <div class="row mt-2">
+                            @foreach ($permissions as $permissionName => $permissionLabel)
+                                <div class="col-md-4 col-sm-6 mb-2">
+                                    <div class="form-check">
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            id="perm_{{ \Illuminate\Support\Str::slug($permissionName, '_') }}"
+                                            name="permission[]"
+                                            value="{{ $permissionName }}"
+                                            {{ in_array($permissionName, old('permission', [])) || (isset($role) && $role->hasPermissionTo($permissionName)) ? 'checked' : '' }}
+                                        >
+                                        <label class="form-check-label" for="perm_{{ \Illuminate\Support\Str::slug($permissionName, '_') }}">
+                                            {{ $permissionLabel }}
+                                        </label>
+                                    </div>
+                                </div>
                             @endforeach
-                        </select>
+                        </div>
                         @if ($errors->has('permission'))
                             <em class="invalid-feedback">
                                 {{ $errors->first('permission') }}
                             </em>
                         @endif
-                        <p class="helper-block">
-                            {{ trans('cruds.role.fields.permissions_helper') }}
-                        </p>
+                        
                     </div>
                     <div>
-                        <input class="btn btn-danger" type="submit" value="{{ trans('global.save') }}">
+                        <input class="btn btn-success rounded-3" type="submit" value="Save">
                     </div>
                 </form>
 
@@ -66,4 +62,4 @@
             </div>
         </div>
     </div>
-</x-admin-layout>
+</x-backend-layout>

@@ -8,6 +8,8 @@ class SpeakingQuestion extends Model
 {
     use HasFactory;
 
+    protected $table = 'speaking_questions';
+
     protected $fillable = [
         'part_number',
         'question_text',

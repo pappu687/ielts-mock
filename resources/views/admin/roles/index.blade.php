@@ -1,85 +1,71 @@
 <x-backend-layout>
     <div class="container-fluid">
-        <div class="d-md-flex d-block align-items-center justify-content-between my-4 page-header-breadcrumb">
+        <div class="d-md-flex d-block align-items-center justify-content-between page-header-breadcrumb">
             <h1 class="page-title fw-semibold fs-18 mb-0">
                 Manage User Roles
             </h1>
             <div class="ms-md-1 ms-0">
                 <a class="btn btn-md btn-primary" href="{{ route('admin.roles.create') }}">
-                    {{ trans('global.add') }} {{ trans('cruds.role.title_singular') }}
+                    New Role
                 </a>
             </div>
         </div>
-        <div class="card custom-card">
-            <div class="card-header justify-content-between">
-                <div class="card-title">
-                    {{ trans('cruds.role.title_singular') }} {{ trans('global.list') }}
-                </div>
-            </div>
-            <table class="table table-striped table-hover datatable datatable-Role">
-                <thead>
-                    <tr>
-                        <th width="10">
-
-                        </th>
-                        <th>
-                            {{ trans('cruds.role.fields.id') }}
-                        </th>
-                        <th>
-                            {{ trans('cruds.role.fields.title') }}
-                        </th>
-                        <th width="150">
-                            {{ trans('cruds.role.fields.permissions') }}
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($roles as $key => $role)
-                        <tr data-entry-id="{{ $role->id }}">
-                            <td>
-
-                            </td>
-                            <td>
-                                {{ $role->id ?? '' }}
-                            </td>
-                            <td>
-                                {{ $role->name ?? '' }}
-                            </td>
-                            <td>
-                                @foreach ($role->permissions()->pluck('name') as $permission)
-                                    <span class="badge bg-info">{{ $permission }}</span>
-                                @endforeach
-                            </td>
-                            <td width="200">
-                                <a class="btn btn-sm btn-primary" href="{{ route('admin.roles.show', $role->id) }}">
-                                    {{ trans('global.view') }}
-                                </a>
-
-                                <a class="btn btn-sm btn-info" href="{{ route('admin.roles.edit', $role->id) }}">
-                                    {{ trans('global.edit') }}
-                                </a>
-
-                                <form action="{{ route('admin.roles.destroy', $role->id) }}" method="POST"
-                                    onsubmit="return confirm('{{ trans('global.areYouSure') }}');"
-                                    style="display: inline-block;">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <input type="submit" class="btn btn-sm btn-danger"
-                                        value="{{ trans('global.delete') }}">
-                                </form>
-                            </td>
-
+        <div class="card custom-card mt-4">            
+            <div class="card-body">
+                <table class="table table-striped table-hover datatable datatable-Role">
+                    <thead>
+                        <tr>
+                            <th>
+                                Role Name
+                            </th>
+                            <th width="150">
+                                Permissions
+                            </th>
+                            <th width="200">Actions</th>
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($roles as $key => $role)
+                            <tr data-entry-id="{{ $role->id }}">
+                                <td>
+                                    {{ $role->name ?? '' }}
+                                </td>
+                                <td>
+                                    {{ $role->permissions()->count() }} Permision(s)
+                                </td>
+                                <td width="200">
+                                    <form action="{{ route('admin.roles.destroy', $role->id) }}" method="POST"
+                                        onsubmit="return confirm('Are you sure?');" style="display: inline-block;">
+                                        <div class="btn-group">
+                                            <a class="btn btn-sm btn-primary"
+                                                href="{{ route('admin.roles.show', $role->id) }}">
+                                                View
+                                            </a>
+
+                                            <a class="btn btn-sm btn-info"
+                                                href="{{ route('admin.roles.edit', $role->id) }}">
+                                                Edit
+                                            </a>
+
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                            <input type="submit" class="btn btn-sm btn-danger" value="Delete">
+                                        </div>
+                                    </form>
+                                </td>
+
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
         @section('scripts')
             @parent
             <script>
                 $(function() {
                     let dtButtons = $.extend(true, [], $.fn.dataTable.defaults.buttons)
-                    let deleteButtonTrans = '{{ trans('global.datatables.delete') }}'
+                    let deleteButtonTrans = 'Delete'
                     let deleteButton = {
                         text: deleteButtonTrans,
                         url: "{{ route('admin.roles.mass_destroy') }}",
@@ -92,15 +78,15 @@
                             });
 
                             if (ids.length === 0) {
-                                alert('{{ trans('global.datatables.zero_selected') }}')
+                                alert('No rows selected')
 
                                 return
                             }
 
-                            if (confirm('{{ trans('global.areYouSure') }}')) {
+                            if (confirm('Are you sure?')) {
                                 $.ajax({
                                         headers: {
-                                            'x-csrf-token': _token
+                                            'x-csrf-token': $('meta[name="csrf-token"]').attr('content')
                                         },
                                         method: 'POST',
                                         url: config.url,

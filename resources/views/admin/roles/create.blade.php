@@ -1,4 +1,4 @@
-<x-admin-layout>
+<x-backend-layout>
     <div class="container-fluid">
         <div class="d-md-flex d-block align-items-center justify-content-between my-3 page-header-breadcrumb">
             <h1 class="page-title fw-semibold fs-18 mb-0">
@@ -33,19 +33,27 @@
                             {{ trans('cruds.role.fields.title_helper') }}
                         </p>
                     </div>
-                    <div class="form-group {{ $errors->has('permissions') ? 'has-error' : '' }}">
-                        <label for="permission">{{ trans('cruds.role.fields.permissions') }}*
-                            <span class="btn btn-info btn-sm select-all">{{ trans('global.select_all') }}</span>
-                            <span
-                                class="btn btn-info btn-sm deselect-all">{{ trans('global.deselect_all') }}</span></label>
-                        <select name="permission[]" id="permission" class="mt-2 form-select select2" multiple="multiple"
-                            required>
-                            @foreach ($permissions as $id => $permissions)
-                                <option value="{{ $id }}"
-                                    {{ in_array($id, old('permission', [])) || (isset($role) && $role->permissions->contains($id)) ? 'selected' : '' }}>
-                                    {{ $permissions }}</option>
+                    <div class="form-group {{ $errors->has('permission') ? 'has-error' : '' }}">
+                        <label>{{ trans('cruds.role.fields.permissions') }}*</label>
+                        <div class="row mt-2">
+                            @foreach ($permissions as $permissionName => $permissionLabel)
+                                <div class="col-md-4 col-sm-6 mb-2">
+                                    <div class="form-check">
+                                        <input
+                                            class="form-check-input"
+                                            type="checkbox"
+                                            id="perm_{{ \Illuminate\Support\Str::slug($permissionName, '_') }}"
+                                            name="permission[]"
+                                            value="{{ $permissionName }}"
+                                            {{ in_array($permissionName, old('permission', [])) ? 'checked' : '' }}
+                                        >
+                                        <label class="form-check-label" for="perm_{{ \Illuminate\Support\Str::slug($permissionName, '_') }}">
+                                            {{ $permissionLabel }}
+                                        </label>
+                                    </div>
+                                </div>
                             @endforeach
-                        </select>
+                        </div>
                         @if ($errors->has('permission'))
                             <em class="invalid-feedback">
                                 {{ $errors->first('permission') }}
@@ -64,4 +72,4 @@
             </div>
         </div>
     </div>
-</x-admin-layout>
+</x-backend-layout>

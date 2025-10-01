@@ -8,6 +8,8 @@ class ListeningAudio extends Model
 {
     use HasFactory;
 
+    protected $table = 'listening_audios';
+
     protected $fillable = [
         'title',
         'audio_file_path',

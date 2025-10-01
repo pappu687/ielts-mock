@@ -122,7 +122,7 @@ Route::prefix('admin')->middleware([ 'auth', 'role:admin|super-admin' ])->group(
         // Content Management Routes
         Route::prefix('question-banks')->group(function () {
             Route::get('/', [ QuestionBankController::class, 'index' ])->name('question-banks.index');
-            Route::get('/list', [ QuestionBankController::class, 'listQuestionBanks' ])->name('question-banks.list');
+            Route::post('/list', [ QuestionBankController::class, 'listQuestionBanks' ])->name('question-banks.list');
             Route::post('/', [ QuestionBankController::class, 'store' ])->name('question-banks.store');
             Route::put('/{questionBank}', [ QuestionBankController::class, 'update' ])->name('question-banks.update');
             Route::post('/{questionBank}/toggle', [ QuestionBankController::class, 'toggleActive' ])->name('question-banks.toggle');

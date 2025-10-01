@@ -8,6 +8,8 @@ class ReadingPassage extends Model
 {
     use HasFactory;
 
+    protected $table = 'reading_passages';
+
     protected $fillable = [
         'title',
         'content',

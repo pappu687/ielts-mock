@@ -37,14 +37,14 @@ class ListeningAudioController extends Controller
     public function listListeningAudios(Request $request)
     {
         if ($request->ajax()) {
-            $listeningAudios = ListeningAudio::select(['id', 'title', 'duration', 'difficulty_level', 'file_size', 'created_at']);
+            $listeningAudios = ListeningAudio::select(['id', 'title', 'duration_seconds', 'difficulty_level', 'question_count', 'created_at']);
             
             return DataTables::of($listeningAudios)
-                ->addColumn('duration', function ($listeningAudio) {
-                    return $listeningAudio->duration ? gmdate('i:s', $listeningAudio->duration) : 'N/A';
+                ->addColumn('duration_seconds', function ($listeningAudio) {
+                    return $listeningAudio->duration_seconds ? gmdate('i:s', $listeningAudio->duration_seconds) : 'N/A';
                 })
-                ->addColumn('file_size', function ($listeningAudio) {
-                    return $listeningAudio->file_size ? number_format($listeningAudio->file_size / 1024, 2) . ' KB' : 'N/A';
+                ->addColumn('question_count', function ($listeningAudio) {
+                    return $listeningAudio->question_count ? number_format($listeningAudio->question_count) : 'N/A';
                 })
                 ->editColumn('created_at', function ($listeningAudio) {
                     return $listeningAudio->created_at->format('Y-m-d H:i:s');
@@ -58,7 +58,7 @@ class ListeningAudioController extends Controller
                     $actions .= '</div>';
                     return $actions;
                 })
-                ->rawColumns(['actions', 'duration', 'file_size', 'created_at'])
+                ->rawColumns(['actions', 'duration_seconds', 'question_count', 'created_at'])
                 ->make(true);
         }
     }

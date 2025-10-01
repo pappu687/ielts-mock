@@ -48,8 +48,7 @@
 
     <div class="page">
 
-        <!-- Start::main-header -->
-        @include('layouts.components.main-header-frontend')
+        <!-- Start::main-header -->        
         <!-- End::main-header -->        
 
         <!-- Start::app-content -->

@@ -37,11 +37,11 @@ class WritingPromptController extends Controller
     public function listWritingPrompts(Request $request)
     {
         if ($request->ajax()) {
-            $writingPrompts = WritingPrompt::select(['id', 'title', 'task_type', 'difficulty_level', 'word_limit', 'created_at']);
+            $writingPrompts = WritingPrompt::select(['id', 'task_type', 'difficulty_level', 'minimum_words', 'created_at']);
             
             return DataTables::of($writingPrompts)
-                ->addColumn('word_limit', function ($writingPrompt) {
-                    return $writingPrompt->word_limit ? $writingPrompt->word_limit . ' words' : 'N/A';
+                ->addColumn('minimum_words', function ($writingPrompt) {
+                    return $writingPrompt->minimum_words ? $writingPrompt->minimum_words . ' words' : 'N/A';
                 })
                 ->editColumn('created_at', function ($writingPrompt) {
                     return $writingPrompt->created_at->format('Y-m-d H:i:s');
