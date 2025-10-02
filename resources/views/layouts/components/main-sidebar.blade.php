@@ -114,14 +114,21 @@
 
                 <!-- Content Management -->
                 <li class="slide has-sub">                
-                    <a href="javascript:void(0);" class="side-menu__item {{ request()->is('admin/question-banks*') || request()->is('admin/questions*') || request()->is('admin/reading-passages*') || request()->is('admin/listening-audios*') || request()->is('admin/writing-prompts*') || request()->is('admin/speaking-questions*') || request()->is('admin/content-approval*') ? 'active open text-indigo' : '' }}">
+                    <a href="javascript:void(0);" class="side-menu__item {{ request()->is('admin/tests*') || request()->is('admin/test-sections*') || request()->is('admin/test-resources*') || request()->is('admin/question-banks*') || request()->is('admin/questions*') || request()->is('admin/reading-passages*') || request()->is('admin/listening-audios*') || request()->is('admin/writing-prompts*') || request()->is('admin/speaking-questions*') || request()->is('admin/content-approval*') ? 'active open text-indigo' : '' }}">
                         <i class="ri ri-file-text-line ri-13x me-2 lh-1"></i>
                         <span class="side-menu__label">Manage Content</span>
                         <i class="ri-arrow-right-line side-menu__angle"></i>
                     </a>                    
-                    <ul class="slide-menu child1 {{ request()->is('admin/question-banks*') || request()->is('admin/questions*') || request()->is('admin/reading-passages*') || request()->is('admin/listening-audios*') || request()->is('admin/writing-prompts*') || request()->is('admin/speaking-questions*') || request()->is('admin/content-approval*') ? 'double-menu-active' : '' }}">
+                    <ul class="slide-menu child1 {{ request()->is('admin/tests*') || request()->is('admin/test-sections*') || request()->is('admin/test-resources*') || request()->is('admin/question-banks*') || request()->is('admin/questions*') || request()->is('admin/reading-passages*') || request()->is('admin/listening-audios*') || request()->is('admin/writing-prompts*') || request()->is('admin/speaking-questions*') || request()->is('admin/content-approval*') ? 'double-menu-active' : '' }}">
                         <li class="slide side-menu__label1">
-                            <a href="javascript:void(0)">Manage Content</a>
+                            <a href="javascript:void(0)">Test Management</a>
+                        </li>
+                        <li class="slide {{ request()->is('admin/tests*') ? 'active' : '' }}">
+                            <a href="{{ route('admin.tests.index') }}" class="side-menu__item">
+                                <i class="ri ri-file-list-line me-1"></i>Tests</a>
+                        </li>
+                        <li class="slide side-menu__label1">
+                            <a href="javascript:void(0)">Content Management</a>
                         </li>
                         <li class="slide {{ request()->is('admin/question-banks*') ? 'active' : '' }}">
                             <a href="{{ route('admin.question-banks.index') }}" class="side-menu__item">

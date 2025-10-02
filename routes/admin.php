@@ -258,6 +258,49 @@ Route::prefix('admin')->middleware([ 'auth', 'role:admin|super-admin' ])->group(
             Route::get('/rejected', [ ContentApprovalController::class, 'rejected' ])->name('content-approval.rejected');
         });
 
+        // Test Management Routes
+        Route::prefix('tests')->group(function () {
+            Route::get('/', [ App\Http\Controllers\Admin\TestController::class, 'index' ])->name('tests.index');
+            Route::get('/list', [ App\Http\Controllers\Admin\TestController::class, 'listTests' ])->name('tests.list');
+            Route::get('/create', [ App\Http\Controllers\Admin\TestController::class, 'create' ])->name('tests.create');
+            Route::post('/', [ App\Http\Controllers\Admin\TestController::class, 'store' ])->name('tests.store');
+            Route::get('/{test}', [ App\Http\Controllers\Admin\TestController::class, 'show' ])->name('tests.show');
+            Route::get('/{test}/edit', [ App\Http\Controllers\Admin\TestController::class, 'edit' ])->name('tests.edit');
+            Route::put('/{test}', [ App\Http\Controllers\Admin\TestController::class, 'update' ])->name('tests.update');
+            Route::delete('/{test}', [ App\Http\Controllers\Admin\TestController::class, 'destroy' ])->name('tests.destroy');
+            Route::post('/{test}/toggle-status', [ App\Http\Controllers\Admin\TestController::class, 'toggleStatus' ])->name('tests.toggle-status');
+        });
+
+        // Test Section Management Routes
+        Route::prefix('test-sections')->group(function () {
+            Route::get('/{testSection}', [ App\Http\Controllers\Admin\TestSectionController::class, 'show' ])->name('test-sections.show');
+            Route::get('/{testSection}/edit', [ App\Http\Controllers\Admin\TestSectionController::class, 'edit' ])->name('test-sections.edit');
+            Route::put('/{testSection}', [ App\Http\Controllers\Admin\TestSectionController::class, 'update' ])->name('test-sections.update');
+            Route::delete('/{testSection}', [ App\Http\Controllers\Admin\TestSectionController::class, 'destroy' ])->name('test-sections.destroy');
+            Route::post('/{testSection}/reorder', [ App\Http\Controllers\Admin\TestSectionController::class, 'reorder' ])->name('test-sections.reorder');
+            
+            // Section Questions Management
+            Route::prefix('{testSection}/questions')->group(function () {
+                Route::get('/', [ App\Http\Controllers\Admin\QuestionController::class, 'index' ])->name('test-sections.questions.index');
+                Route::get('/create', [ App\Http\Controllers\Admin\QuestionController::class, 'create' ])->name('test-sections.questions.create');
+                Route::post('/', [ App\Http\Controllers\Admin\QuestionController::class, 'store' ])->name('test-sections.questions.store');
+                Route::get('/{question}', [ App\Http\Controllers\Admin\QuestionController::class, 'show' ])->name('test-sections.questions.show');
+                Route::get('/{question}/edit', [ App\Http\Controllers\Admin\QuestionController::class, 'edit' ])->name('test-sections.questions.edit');
+                Route::put('/{question}', [ App\Http\Controllers\Admin\QuestionController::class, 'update' ])->name('test-sections.questions.update');
+                Route::delete('/{question}', [ App\Http\Controllers\Admin\QuestionController::class, 'destroy' ])->name('test-sections.questions.destroy');
+                Route::post('/{question}/reorder', [ App\Http\Controllers\Admin\QuestionController::class, 'reorder' ])->name('test-sections.questions.reorder');
+            });
+        });
+
+        // Test Resource Management Routes
+        Route::prefix('test-resources')->group(function () {
+            Route::post('/', [ App\Http\Controllers\Admin\TestResourceController::class, 'store' ])->name('test-resources.store');
+            Route::get('/{testResource}', [ App\Http\Controllers\Admin\TestResourceController::class, 'show' ])->name('test-resources.show');
+            Route::put('/{testResource}', [ App\Http\Controllers\Admin\TestResourceController::class, 'update' ])->name('test-resources.update');
+            Route::delete('/{testResource}', [ App\Http\Controllers\Admin\TestResourceController::class, 'destroy' ])->name('test-resources.destroy');
+            Route::post('/{testResource}/upload', [ App\Http\Controllers\Admin\TestResourceController::class, 'upload' ])->name('test-resources.upload');
+        });
+
         // Future Enhancements Routes
         Route::prefix('future-enhancements')->group(function () {
             Route::post('/vr-settings', [ FutureEnhancementController::class, 'vrSettings' ])->name('future.vr-settings');
