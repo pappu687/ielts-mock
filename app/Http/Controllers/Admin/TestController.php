@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreTestRequest;
 use App\Http\Requests\UpdateTestRequest;
 use App\Models\Test;
+use Carbon\Carbon;
 use App\Models\TestSection;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -53,15 +54,21 @@ class TestController extends Controller
             ->addColumn('questions_count', function ($test) {
                 return $test->sections->sum('questions_count');
             })
+            ->editColumn('name', function ($test) {
+                return '<a class="text-decoration-underline link-underline-info link-offset-3" href="' . route('admin.tests.show', $test->id) . '">' . $test->name . '</a>';
+            })
+            ->editColumn('created_at', function ($test) {
+                return Carbon::parse($test->created_at)->format('M d,Y h:i:a');
+            })
             ->addColumn('actions', function ($test) {
-                $actions = '<div class="btn-group" role="group">';
-                $actions .= '<a href="' . route('admin.tests.show', $test->id) . '" class="btn btn-sm btn-info" title="View"><i class="ri-eye-line"></i></a>';
-                $actions .= '<a href="' . route('admin.tests.edit', $test->id) . '" class="btn btn-sm btn-warning" title="Edit"><i class="ri-edit-line"></i></a>';
-                $actions .= '<button type="button" class="btn btn-sm btn-danger" onclick="deleteTest(' . $test->id . ')" title="Delete"><i class="ri-delete-bin-line"></i></button>';
+                $actions = '<div class="btn-group btn-group-outlined" role="group">';
+                $actions .= '<a href="' . route('admin.tests.show', $test->id) . '" class="btn btn-outline-secondary btn-sm" title="View"><i class="ri-eye-line"></i></a>';
+                $actions .= '<a href="' . route('admin.tests.edit', $test->id) . '" class="btn btn-outline-secondary btn-sm" title="Edit"><i class="ri-edit-line"></i></a>';
+                $actions .= '<button type="button" class="btn btn-outline-secondary btn-sm btn-danger" onclick="deleteTest(' . $test->id . ')" title="Delete"><i class="ri-delete-bin-line"></i></button>';
                 $actions .= '</div>';
                 return $actions;
             })
-            ->rawColumns(['status', 'actions'])
+            ->rawColumns(['status', 'actions', 'name'])
             ->make(true);
     }
 
