@@ -63,7 +63,7 @@ class TestController extends Controller
             ->addColumn('actions', function ($test) {
                 $actions = '<div class="btn-group btn-group-outlined" role="group">';
                 $actions .= '<a href="' . route('admin.tests.show', $test->id) . '" class="btn btn-outline-secondary btn-sm" title="View"><i class="ri-eye-line"></i></a>';
-                $actions .= '<a href="' . route('admin.tests.edit', $test->id) . '" class="btn btn-outline-secondary btn-sm" title="Edit"><i class="ri-edit-line"></i></a>';
+                $actions .= '<button type="button" class="btn btn-outline-secondary btn-sm edit-test-btn" data-id="' . $test->id . '" title="Edit"><i class="ri-edit-line"></i></button>';
                 $actions .= '<button type="button" class="btn btn-outline-secondary btn-sm btn-danger" onclick="deleteTest(' . $test->id . ')" title="Delete"><i class="ri-delete-bin-line"></i></button>';
                 $actions .= '</div>';
                 return $actions;
@@ -97,6 +97,14 @@ class TestController extends Controller
         // Create default sections based on test type
         $this->createDefaultSections($test, $request->type);
 
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Test created successfully.',
+                'redirect_url' => route('admin.tests.show', $test)
+            ]);
+        }
+
         return redirect()
             ->route('admin.tests.show', $test)
             ->with('success', 'Test created successfully.');
@@ -116,6 +124,10 @@ class TestController extends Controller
      */
     public function edit(Test $test)
     {
+        // Return JSON for Offcanvas if requested via AJAX
+        if (request()->ajax()) {
+            return response()->json($test);
+        }
         return view('admin.tests.edit', compact('test'));
     }
 
@@ -131,6 +143,13 @@ class TestController extends Controller
             'duration_minutes' => $request->duration_minutes,
             'settings' => $request->settings ?? [],
         ]);
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Test updated successfully.'
+            ]);
+        }
 
         return redirect()
             ->route('admin.tests.show', $test)

@@ -16,10 +16,22 @@ class QuestionController extends Controller
     /**
      * Display questions for a specific test section
      */
-    public function index(TestSection $testSection)
+    public function index(?TestSection $testSection = null)
     {
-        $testSection->load(['test', 'questions']);
-        return view('admin.questions.index', compact('testSection'));
+        if ($testSection) {
+            $testSection->load(['test', 'questions']);
+        }
+
+        $columns = [
+            ['data' => 'id', 'title' => 'ID'],
+            ['data' => 'question_text', 'title' => 'Question'],
+            ['data' => 'question_type', 'title' => 'Type'],
+            ['data' => 'is_approved', 'title' => 'Approved'],
+            ['data' => 'created_at', 'title' => 'Created At'],
+            ['data' => 'actions', 'title' => 'Actions', 'orderable' => false, 'searchable' => false],
+        ];
+
+        return view('admin.questions.index', compact('testSection', 'columns'));
     }
 
     /**

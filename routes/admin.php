@@ -174,12 +174,14 @@ Route::prefix('admin')->middleware([ 'auth', 'role:admin|super-admin' ])->group(
         // Assessment Management Routes
         Route::prefix('reading-assessments')->group(function () {
             Route::get('/scores', [ ReadingAssessmentController::class, 'scores' ])->name('reading-assessments.scores');
+            Route::put('/{examSection}/score', [ ReadingAssessmentController::class, 'updateScore' ])->name('reading-assessments.update-score');
             Route::get('/{examSection}/responses', [ ReadingAssessmentController::class, 'responses' ])->name('reading-assessments.responses');
             Route::post('/{examSection}/feedback', [ ReadingAssessmentController::class, 'generateFeedback' ])->name('reading-assessments.feedback');
         });
 
         Route::prefix('listening-assessments')->group(function () {
             Route::get('/scores', [ ListeningAssessmentController::class, 'scores' ])->name('listening-assessments.scores');
+            Route::put('/{examSection}/score', [ ListeningAssessmentController::class, 'updateScore' ])->name('listening-assessments.update-score');
             Route::get('/{examSection}/responses', [ ListeningAssessmentController::class, 'responses' ])->name('listening-assessments.responses');
             Route::post('/{examSection}/feedback', [ ListeningAssessmentController::class, 'generateFeedback' ])->name('listening-assessments.feedback');
         });
